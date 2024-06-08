@@ -11,7 +11,7 @@ if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Stage 2 --
         local Stage2Part = workspace.AutoFarmFolder.Part2ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage2Part.CFrame
-        wait(1.5)
+        wait(2)
         -- Stage 3 --
         local Stage3Part = workspace.AutoFarmFolder.Part3ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage3Part.CFrame
@@ -27,7 +27,7 @@ if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Stage 6 --
         local Stage6Part = workspace.AutoFarmFolder.Part6ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage6Part.CFrame
-        wait(2)
+        wait(1.5)
         -- Stage 7 --
         local Stage7Part = workspace.AutoFarmFolder.Part7ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage7Part.CFrame
