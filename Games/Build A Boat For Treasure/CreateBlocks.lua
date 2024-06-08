@@ -169,6 +169,7 @@ if not workspace:FindFirstChild("AutoFarmFolder") then
         local SafeposPart9 = CFrame.new(-58.393116, 66.7027397, 7665.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
         local SafePart9 = Instance.new("Part", AutoFarmFolder)
         SafePart9.Anchored = true
+        SafePart9.CanCollide = false
         SafePart9.Name = "SafePart9ForAutoFarm"
         SafePart9.CFrame = SafeposPart9
         SafePart9.Transparency = 1
