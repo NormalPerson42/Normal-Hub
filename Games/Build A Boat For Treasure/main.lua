@@ -187,12 +187,12 @@ function StartAutoFarm()
         -- Stage 1 --
         local Stage1Part = workspace.AutoFarmFolder.Part1ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage1Part.CFrame
-        wait(3)
+        wait(3.5)
         if AutoFarmRunning then
         -- Chest Stage -- 
         local ChestPart = workspace.AutoFarmFolder.ChestPartForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = ChestPart.CFrame
-        wait(0.3)
+        wait(0.2)
         if AutoFarmRunning then
         -- Stage 2 --
         local Stage2Part = workspace.AutoFarmFolder.Part2ForAutoFarm
