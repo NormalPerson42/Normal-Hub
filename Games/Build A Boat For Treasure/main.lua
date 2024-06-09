@@ -260,9 +260,11 @@ function LoadBABFT()
             if Value then
                 CreateParts()
                 StartAutoFarm()
-                wait(17)
             end
+	wait(17)
         end
 	end    
 })
 end
+
+LoadBABFT()
