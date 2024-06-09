@@ -1,4 +1,5 @@
-if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+if game.Players.LocalPlayer.Character then
+        if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
         -- Stage 1 --
         local Stage1Part = workspace.AutoFarmFolder.Part1ForAutoFarm
@@ -39,4 +40,5 @@ if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Stage 9 --
         local Stage9Part = workspace.AutoFarmFolder.Part9ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage9Part.CFrame
+        end
 end
