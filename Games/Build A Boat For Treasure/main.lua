@@ -260,6 +260,7 @@ function LoadBABFT()
 	Callback = function(Value)
 	    if Value == true then
 		AutoFarmRunning = true
+		print("true")
 	    else
 		AutoFarmRunning = false
 	    end
@@ -272,6 +273,7 @@ LoadBABFT()
 while true do
     wait(0.0001)
     if AutoFarmRunning == true then
+	print("monke")
 	CreateParts()
 	StartAutoFarm()
     end
