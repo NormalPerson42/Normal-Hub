@@ -1,6 +1,6 @@
 if game.Players.LocalPlayer.Character then
         if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 1
         -- Stage 1 --
         local Stage1Part = workspace.AutoFarmFolder.Part1ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage1Part.CFrame
