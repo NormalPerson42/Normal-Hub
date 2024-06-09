@@ -243,8 +243,26 @@ function StartAutoFarm()
 end
 end
 
-while true do
-    CreateParts()
-    StartAutoFarm()
-    wait(17)
+function LoadBABFT()
+    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+    local Window = OrionLib:MakeWindow({Name = "Normal Hub | Build A Boat For Treasure", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroText = "Loading Normal Hub | Build A Boat For Treasure"})
+    local AutoFarm = Window:MakeTab({
+	    Name = "AutoFarm",
+	    Icon = "rbxassetid://4483345998",
+	    PremiumOnly = false
+    })
+
+    AutoFarm:AddToggle({
+	Name = "Auto Farm Gold (600 GPM)",
+	Default = false,
+	Callback = function(Value)
+		while true do
+            if Value then
+                CreateParts()
+                StartAutoFarm()
+                wait(17)
+            end
+        end
+	end    
+})
 end
