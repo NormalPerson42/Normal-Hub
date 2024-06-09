@@ -256,13 +256,7 @@ function LoadBABFT()
 	Name = "Auto Farm Gold (600 GPM)",
 	Default = false,
 	Callback = function(Value)
-		while true do
-            if Value then
-                CreateParts()
-                StartAutoFarm()
-            end
-	wait(17)
-        end
+
 	end    
 })
 end
