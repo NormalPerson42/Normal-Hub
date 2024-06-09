@@ -260,6 +260,8 @@ function LoadBABFT()
 	Callback = function(Value)
 	    if Value == true then
 		AutoFarmRunning = true
+		CreateParts()
+		StartAutoFarm()
 		print("true")
 	    else
 		AutoFarmRunning = false
