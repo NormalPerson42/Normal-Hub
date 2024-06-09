@@ -274,6 +274,6 @@ while true do
     if AutoFarmRunning == true then
 	CreateParts()
 	StartAutoFarm()
-	wait(17)
     end
+    wait(17)
 end
