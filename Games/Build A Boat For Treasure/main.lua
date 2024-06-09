@@ -1,3 +1,5 @@
+local AutoFarmRunning = false
+
 function CreateParts()
     if not workspace:FindFirstChild("AutoFarmFolder") then
         -- Folder --
@@ -256,9 +258,22 @@ function LoadBABFT()
 	Name = "Auto Farm Gold (600 GPM)",
 	Default = false,
 	Callback = function(Value)
-
+	    if Value == true then
+		AutoFarmRunning = true
+	    else
+		AutoFarmRunning = false
+	    end
 	end    
 })
 end
 
 LoadBABFT()
+
+while true do
+    wait(0.0001)
+    if AutoFarmRunning == true then
+	CreateParts()
+	StartAutoFarm()
+	wait(17)
+    end
+end
