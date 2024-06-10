@@ -6,6 +6,16 @@ function CreateParts()
         local AutoFarmFolder = Instance.new("Folder", workspace)
         AutoFarmFolder.Name = "AutoFarmFolder"
 
+        -- Tp Part --
+        local TpPart = Instance.new("Part")
+        TpPart.Anchored = true
+        TpPart.Parent = AutoFarmFolder
+        TpPart.Name = "TpPart"
+        TpPart.CFrame = CFrame.new(-68.5924149, -9.70000744, 1.534363, -0.998799026, -3.175521e-08, -0.0489947833, -3.039559e-08, 1, -2.84953803e-08, 0.0489947833, -2.6971934e-08, -0.998799026)
+        TpPart.Size = Vector3.new(1500, 5, 10000)
+        TpPart.CanCollide = false
+        TpPart.Transparency = 1
+
         -- Stage 1 --
         local posPart1 = CFrame.new(-58.393116, 86.7027397, 1465.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
         local Part1 = Instance.new("Part", AutoFarmFolder)
@@ -182,57 +192,65 @@ end
 
 function StartAutoFarm()
     if game.Players.LocalPlayer.Character then
-        if AutoFarmRunning then
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 1
+        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
         -- Stage 1 --
         local Stage1Part = workspace.AutoFarmFolder.Part1ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage1Part.CFrame
-        wait(3.5)
-        if AutoFarmRunning then
+        wait(3)
+        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Chest Stage -- 
         local ChestPart = workspace.AutoFarmFolder.ChestPartForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = ChestPart.CFrame
         wait(0.2)
-        if AutoFarmRunning then
+        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Stage 2 --
         local Stage2Part = workspace.AutoFarmFolder.Part2ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage2Part.CFrame
         wait(2)
-        if AutoFarmRunning then
+        -- Chest Stage Try 2 --
+        local ChestPart = workspace.AutoFarmFolder.ChestPartForAutoFarm
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = ChestPart.CFrame
+        wait(0.2)
+        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Stage 3 --
         local Stage3Part = workspace.AutoFarmFolder.Part3ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage3Part.CFrame
         wait(1.5)
-        if AutoFarmRunning then
+        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        -- Chest Stage Try 3 --
+        local ChestPart = workspace.AutoFarmFolder.ChestPartForAutoFarm
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = ChestPart.CFrame
+        wait(0.2)
+        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Stage 4 --
         local Stage4Part = workspace.AutoFarmFolder.Part4ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage4Part.CFrame
         wait(2)
-        if AutoFarmRunning then
+        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Stage 5 --
         local Stage5Part = workspace.AutoFarmFolder.Part5ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage5Part.CFrame
         wait(2)
-        if AutoFarmRunning then
+        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Stage 6 --
         local Stage6Part = workspace.AutoFarmFolder.Part6ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage6Part.CFrame
         wait(1.5)
-        if AutoFarmRunning then
+        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Stage 7 --
         local Stage7Part = workspace.AutoFarmFolder.Part7ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage7Part.CFrame
         wait(1.5)
-        if AutoFarmRunning then
+        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Stage 8 --
         local Stage8Part = workspace.AutoFarmFolder.Part8ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage8Part.CFrame
         wait(2)
-        if AutoFarmRunning then
+        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         -- Stage 9 --
         local Stage9Part = workspace.AutoFarmFolder.Part9ForAutoFarm
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage9Part.CFrame
-        AutoFarmRanOneTime = true
                                                                                 end
                                                                         end
                                                                 end
@@ -243,6 +261,7 @@ function StartAutoFarm()
                         end
                 end
         end
+end
 end
 end
 
@@ -261,9 +280,14 @@ function LoadBABFT()
 	Callback = function(Value)
 	    if Value == true then
 		    AutoFarmRunning = true
+            CreateParts()
+            StartAutoFarm()
 	    else
-		    AutoFarmRunning = false
-            game.Players.LocalPlayer.Character.Humanoid.Health = 0
+            if workspace:FindFirstChild("AutoFarmFolder") then
+		        AutoFarmRunning = false
+                game.Players.LocalPlayer.Character.Humanoid.Health = 0
+                workspace.AutoFarmFolder:Destroy()
+            end
 	    end
 	end    
 })
@@ -271,11 +295,12 @@ end
 
 LoadBABFT()
 
-while true do
-    wait(0.0001)
-    if AutoFarmRunning == true then
-	    CreateParts()
-	    StartAutoFarm()
-        wait(15)
+workspace:WaitForChild("AutoFarmFolder").TpPart.Touched:Connect(function(hit)
+    if AutoFarmRunning then
+        if hit.Parent:FindFirstChild("Humanoid") then
+            if hit.Parent.Name == game.Players.LocalPlayer.Name then
+                StartAutoFarm()
+            end
+        end
     end
-end
+end)
