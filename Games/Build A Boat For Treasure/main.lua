@@ -299,6 +299,7 @@ workspace:WaitForChild("AutoFarmFolder").TpPart.Touched:Connect(function(hit)
     if AutoFarmRunning then
         if hit.Parent:FindFirstChild("Humanoid") then
             if hit.Parent.Name == game.Players.LocalPlayer.Name then
+		wait(1)
                 StartAutoFarm()
             end
         end
