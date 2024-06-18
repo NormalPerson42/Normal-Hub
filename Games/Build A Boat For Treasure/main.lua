@@ -1,306 +1,342 @@
-local AutoFarmRunning = false
+-- Variables --
 
-function CreateParts()
-    if not workspace:FindFirstChild("AutoFarmFolder") then
-        -- Folder --
-        local AutoFarmFolder = Instance.new("Folder", workspace)
-        AutoFarmFolder.Name = "AutoFarmFolder"
+-- Visuals --
+local Chams = false
+local Chams_Opacity = 0.5
+local roles 
 
-        -- Tp Part --
-        local TpPart = Instance.new("Part")
-        TpPart.Anchored = true
-        TpPart.Parent = AutoFarmFolder
-        TpPart.Name = "TpPart"
-        TpPart.CFrame = CFrame.new(-68.5924149, -9.70000744, 1.534363, -0.998799026, -3.175521e-08, -0.0489947833, -3.039559e-08, 1, -2.84953803e-08, 0.0489947833, -2.6971934e-08, -0.998799026)
-        TpPart.Size = Vector3.new(1500, 5, 10000)
-        TpPart.CanCollide = false
-        TpPart.Transparency = 1
-
-        -- Stage 1 --
-        local posPart1 = CFrame.new(-58.393116, 86.7027397, 1465.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local Part1 = Instance.new("Part", AutoFarmFolder)
-        Part1.Anchored = true
-        Part1.Name = "Part1ForAutoFarm"
-        Part1.CFrame = posPart1
-        Part1.CanCollide = false
-        Part1.Transparency = 1
-
-        -- Stage 1 Safe Part --
-        local SafeposPart1 = CFrame.new(-58.393116, 66.7027397, 1465.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local SafePart1 = Instance.new("Part", AutoFarmFolder)
-        SafePart1.Anchored = true
-        SafePart1.Name = "SafePart1ForAutoFarm"
-        SafePart1.CFrame = SafeposPart1
-        SafePart1.Transparency = 1
-        SafePart1.Size = Vector3.new(10, 1, 10)
-
-        -- Chest Stage --
-        local posChestPart = CFrame.new(-55.8702431, -360.406219, 9500.6582, -0.999961853, 4.93152541e-09, -0.00873388629, 4.64847671e-09, 1, 3.2428364e-08, 0.00873388629, 3.23865272e-08, -0.999961853)
-        local ChestPart = Instance.new("Part", AutoFarmFolder)
-        ChestPart.Anchored = true
-        ChestPart.Name = "ChestPartForAutoFarm"
-        ChestPart.CFrame = posChestPart
-        ChestPart.Transparency = 1
-        ChestPart.CanCollide = false
-
-        -- Stage 2 --
-        local posPart2 = CFrame.new(-58.393116, 86.7027397, 2200.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local Part2 = Instance.new("Part", AutoFarmFolder)
-        Part2.Anchored = true
-        Part2.Name = "Part2ForAutoFarm"
-        Part2.CFrame = posPart2
-        Part2.CanCollide = false
-        Part2.Transparency = 1
-
-        -- Stage 2 Safe Part --
-        local SafeposPart2 = CFrame.new(-58.393116, 66.7027397, 2200.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local SafePart2 = Instance.new("Part", AutoFarmFolder)
-        SafePart2.Anchored = true
-        SafePart2.Name = "SafePart2ForAutoFarm"
-        SafePart2.CFrame = SafeposPart2
-        SafePart2.Transparency = 1
-        SafePart2.Size = Vector3.new(10, 1, 10)
-
-        -- Stage 3 --
-        local posPart3 = CFrame.new(-58.393116, 86.7027397, 2935.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local Part3 = Instance.new("Part", AutoFarmFolder)
-        Part3.Anchored = true
-        Part3.Name = "Part3ForAutoFarm"
-        Part3.CFrame = posPart3
-        Part3.CanCollide = false
-        Part3.Transparency = 1
-
-        -- Stage 3 Safe Part --
-        local SafeposPart3 = CFrame.new(-58.393116, 66.7027397, 2935.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local SafePart3 = Instance.new("Part", AutoFarmFolder)
-        SafePart3.Anchored = true
-        SafePart3.Name = "SafePart3ForAutoFarm"
-        SafePart3.CFrame = SafeposPart3
-        SafePart3.Transparency = 1
-        SafePart3.Size = Vector3.new(10, 1, 10)
-
-        -- Stage 4 --
-        local posPart4 = CFrame.new(-58.393116, 86.7027397, 3730.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local Part4 = Instance.new("Part", AutoFarmFolder)
-        Part4.Anchored = true
-        Part4.Name = "Part4ForAutoFarm"
-        Part4.CFrame = posPart4
-        Part4.CanCollide = false
-        Part4.Transparency = 1
-
-        -- Stage 4 Safe Part --
-        local SafeposPart4 = CFrame.new(-58.393116, 66.7027397, 3730.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local SafePart4 = Instance.new("Part", AutoFarmFolder)
-        SafePart4.Anchored = true
-        SafePart4.Name = "SafePart4ForAutoFarm"
-        SafePart4.CFrame = SafeposPart4
-        SafePart4.Transparency = 1
-        SafePart4.Size = Vector3.new(10, 1, 10)
-
-        -- Stage 5 --
-        local posPart5 = CFrame.new(-58.393116, 86.7027397, 4530.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local Part5 = Instance.new("Part", AutoFarmFolder)
-        Part5.Anchored = true
-        Part5.Name = "Part5ForAutoFarm"
-        Part5.CFrame = posPart5
-        Part5.CanCollide = false
-        Part5.Transparency = 1
-
-        -- Stage 5 Safe Part --
-        local SafeposPart5 = CFrame.new(-58.393116, 66.7027397, 4530.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local SafePart5 = Instance.new("Part", AutoFarmFolder)
-        SafePart5.Anchored = true
-        SafePart5.Name = "SafePart5ForAutoFarm"
-        SafePart5.CFrame = SafeposPart5
-        SafePart5.Transparency = 1
-        SafePart5.Size = Vector3.new(10, 1, 10)
-
-        -- Stage 6 --
-        local posPart6 = CFrame.new(-58.393116, 86.7027397, 5330.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local Part6 = Instance.new("Part", AutoFarmFolder)
-        Part6.Anchored = true
-        Part6.Name = "Part6ForAutoFarm"
-        Part6.CFrame = posPart6
-        Part6.CanCollide = false
-        Part6.Transparency = 1
-
-        -- Stage 6 Safe Part --
-        local SafeposPart6 = CFrame.new(-58.393116, 66.7027397, 5330.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local SafePart6 = Instance.new("Part", AutoFarmFolder)
-        SafePart6.Anchored = true
-        SafePart6.Name = "SafePart6ForAutoFarm"
-        SafePart6.CFrame = SafeposPart6
-        SafePart6.Transparency = 1
-        SafePart6.Size = Vector3.new(10, 1, 10)
-
-        -- Stage 7 --
-        local posPart7 = CFrame.new(-58.393116, 86.7027397, 6065.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local Part7 = Instance.new("Part", AutoFarmFolder)
-        Part7.Anchored = true
-        Part7.Name = "Part7ForAutoFarm"
-        Part7.CFrame = posPart7
-        Part7.CanCollide = false
-        Part7.Transparency = 1
-
-        -- Stage 7 Safe Part --
-        local SafeposPart7 = CFrame.new(-58.393116, 66.7027397, 6065.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local SafePart7 = Instance.new("Part", AutoFarmFolder)
-        SafePart7.Anchored = true
-        SafePart7.Name = "SafePart7ForAutoFarm"
-        SafePart7.CFrame = SafeposPart7
-        SafePart7.Transparency = 1
-        SafePart7.Size = Vector3.new(10, 1, 10)
-
-        -- Stage 8 --
-        local posPart8 = CFrame.new(-58.393116, 86.7027397, 6865.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local Part8 = Instance.new("Part", AutoFarmFolder)
-        Part8.Anchored = true
-        Part8.Name = "Part8ForAutoFarm"
-        Part8.CFrame = posPart8
-        Part8.CanCollide = false
-        Part8.Transparency = 1
-
-        -- Stage 8 Safe Part --
-        local SafeposPart8 = CFrame.new(-58.393116, 66.7027397, 6865.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local SafePart8 = Instance.new("Part", AutoFarmFolder)
-        SafePart8.Anchored = true
-        SafePart8.Name = "SafePart8ForAutoFarm"
-        SafePart8.CFrame = SafeposPart8
-        SafePart8.Transparency = 1
-        SafePart8.Size = Vector3.new(10, 1, 10)
-
-        -- Stage 9 --
-        local posPart9 = CFrame.new(-58.393116, 86.7027397, 7665.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local Part9 = Instance.new("Part", AutoFarmFolder)
-        Part9.Anchored = true
-        Part9.Name = "Part9ForAutoFarm"
-        Part9.CFrame = posPart9
-        Part9.CanCollide = false
-        Part9.Transparency = 1
-
-        -- Stage 9 Safe Part --
-        local SafeposPart9 = CFrame.new(-58.393116, 66.7027397, 7665.51404, -0.999047935, 8.01225752e-09, 0.0436260179, 4.22097557e-09, 1, -8.69962804e-08, -0.0436260179, -8.67293082e-08, -0.999047935)
-        local SafePart9 = Instance.new("Part", AutoFarmFolder)
-        SafePart9.Anchored = true
-        SafePart9.CanCollide = false
-        SafePart9.Name = "SafePart9ForAutoFarm"
-        SafePart9.CFrame = SafeposPart9
-        SafePart9.Transparency = 1
-        SafePart9.Size = Vector3.new(10, 1, 10)
-    end
+-- Functions --
+function CreateChams()
+	for i, v in pairs(game:GetService("Players"):GetChildren()) do
+		if v ~= game:GetService("Players").LocalPlayer and v.Character and not v.Character:FindFirstChild("Highlight") then
+            Instance.new("Highlight", v.Character)      
+		end
+	end
+end
+function UpdateChams()
+	for _, v in pairs(game:GetService("Players"):GetChildren()) do
+		if v ~= game:GetService("Players").LocalPlayer and v.Character and v.Character:FindFirstChild("Highlight") then
+			Highlight = v.Character:FindFirstChild("Highlight")
+            Highlight.FillTransparency = Chams_Opacity
+			if v.Name == Sheriff and IsAlive(v) then
+				Highlight.FillColor = Color3.fromRGB(0, 0, 225)
+			elseif v.Name == Murder and IsAlive(v) then
+				Highlight.FillColor = Color3.fromRGB(225, 0, 0)
+			elseif v.Name == Hero and IsAlive(v) and not IsAlive(game:GetService("Players")[Sheriff]) then
+				Highlight.FillColor = Color3.fromRGB(255, 250, 0)
+			else
+				Highlight.FillColor = Color3.fromRGB(0, 225, 0)
+			end
+		end
+	end
+end	
+function IsAlive(Player)
+	for i, v in pairs(roles) do
+		if Player.Name == i then
+			if not v.Killed and not v.Dead then
+				return true
+			else
+				return false
+			end
+		end
+	end
 end
 
-function StartAutoFarm()
-    if game.Players.LocalPlayer.Character then
-        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
-        -- Stage 1 --
-        local Stage1Part = workspace.AutoFarmFolder.Part1ForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage1Part.CFrame
-        wait(3)
-        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        -- Chest Stage -- 
-        local ChestPart = workspace.AutoFarmFolder.ChestPartForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = ChestPart.CFrame
-        wait(0.2)
-        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        -- Stage 2 --
-        local Stage2Part = workspace.AutoFarmFolder.Part2ForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage2Part.CFrame
-        wait(2)
-        -- Chest Stage Try 2 --
-        local ChestPart = workspace.AutoFarmFolder.ChestPartForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = ChestPart.CFrame
-        wait(0.2)
-        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        -- Stage 3 --
-        local Stage3Part = workspace.AutoFarmFolder.Part3ForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage3Part.CFrame
-        wait(1.5)
-        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        -- Chest Stage Try 3 --
-        local ChestPart = workspace.AutoFarmFolder.ChestPartForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = ChestPart.CFrame
-        wait(0.2)
-        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        -- Stage 4 --
-        local Stage4Part = workspace.AutoFarmFolder.Part4ForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage4Part.CFrame
-        wait(2)
-        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        -- Stage 5 --
-        local Stage5Part = workspace.AutoFarmFolder.Part5ForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage5Part.CFrame
-        wait(2)
-        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        -- Stage 6 --
-        local Stage6Part = workspace.AutoFarmFolder.Part6ForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage6Part.CFrame
-        wait(1.5)
-        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        -- Stage 7 --
-        local Stage7Part = workspace.AutoFarmFolder.Part7ForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage7Part.CFrame
-        wait(1.5)
-        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        -- Stage 8 --
-        local Stage8Part = workspace.AutoFarmFolder.Part8ForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage8Part.CFrame
-        wait(2)
-        if AutoFarmRunning and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        -- Stage 9 --
-        local Stage9Part = workspace.AutoFarmFolder.Part9ForAutoFarm
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Stage9Part.CFrame
-                                                                                end
-                                                                        end
-                                                                end
-                                                        end
-                                                end
-                                        end
-                                end
-                        end
-                end
-        end
-end
-end
-end
-
-function LoadBABFT()
-    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-    local Window = OrionLib:MakeWindow({Name = "Normal Hub | Build A Boat For Treasure", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroText = "Loading Normal Hub | Build A Boat For Treasure"})
-    local AutoFarm = Window:MakeTab({
-	    Name = "AutoFarm",
-	    Icon = "rbxassetid://4483345998",
-	    PremiumOnly = false
-    })
-
-    AutoFarm:AddToggle({
-	Name = "Auto Farm Gold (600 GPM)",
+-- UI Creater --
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Normal Hub | Murder Mystery 2", HidePremium = false, SaveConfig = false, ConfigFolder = "OrionTest"})
+local Visuals = Window:MakeTab({
+	Name = "Visuals",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Visuals:AddSection({
+    Name = "ESP"
+})
+Visuals:AddToggle({
+	Name = "All ESP",
 	Default = false,
 	Callback = function(Value)
-	    if Value == true then
-		    AutoFarmRunning = true
-            CreateParts()
-            StartAutoFarm()
-	    else
-            if workspace:FindFirstChild("AutoFarmFolder") then
-		        AutoFarmRunning = false
-                game.Players.LocalPlayer.Character.Humanoid.Health = 0
-                workspace.AutoFarmFolder:Destroy()
-            end
-	    end
+		if Value then
+        else
+        end
 	end    
 })
-end
-
-LoadBABFT()
-
-workspace:WaitForChild("AutoFarmFolder").TpPart.Touched:Connect(function(hit)
-    if AutoFarmRunning then
-        if hit.Parent:FindFirstChild("Humanoid") then
-            if hit.Parent.Name == game.Players.LocalPlayer.Name then
-		wait(1)
-                StartAutoFarm()
+Visuals:AddToggle({
+	Name = "Murderer ESP Only",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Visuals:AddToggle({
+	Name = "Sheriff ESP Only",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Visuals:AddSection({
+    Name = "Chams"
+})
+Visuals:AddToggle({
+	Name = "All Chams",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+            Chams = true
+        else
+            Chams = false
+        end
+	end    
+})
+Visuals:AddToggle({
+	Name = "Murderer Chams Only",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Visuals:AddToggle({
+	Name = "Sheriff Chams Only",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Visuals:AddToggle({
+	Name = "Coins Chams",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Visuals:AddSlider({
+	Name = "Chams Opacity",
+	Min = 0,
+	Max = 1,
+	Default = 0.5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 0.01,
+	ValueName = "Transparency",
+	Callback = function(Value)
+        Chams_Opacity = Value
+	end    
+})
+Visuals:AddSection({
+    Name = "Effects"
+})
+Visuals:AddToggle({
+	Name = "Gun Drop ESP",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Visuals:AddToggle({
+	Name = "Instant Role Notify",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Visuals:AddToggle({
+	Name = "See Dead Chat",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Visuals:AddToggle({
+	Name = "Loop All Interact",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Visuals:AddToggle({
+	Name = "Mute Other Radios",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+local Player = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Player:AddSection({
+    Name = "Player Mods:"
+})
+Player:AddToggle({
+	Name = "Toggle Fly",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Player:AddTextbox({
+	Name = "Fly Speed",
+	Default = "1",
+	TextDisappear = false,
+	Callback = function(Value)
+	end	  
+})
+Player:AddToggle({
+	Name = "Toggle Ctrl Click TP",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Player:AddToggle({
+	Name = "Toggle Infinite Jump",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Player:AddToggle({
+	Name = "Toggle Noclip",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Player:AddToggle({
+	Name = "Toggle Shift Run",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Player:AddTextbox({
+	Name = "WalkSpeed",
+	Default = "16",
+	TextDisappear = false,
+	Callback = function(Value)
+	end	  
+})
+Player:AddTextbox({
+	Name = "JumpPower",
+	Default = "50",
+	TextDisappear = false,
+	Callback = function(Value)
+	end	  
+})
+Player:AddButton({
+	Name = "God Mode",
+	Callback = function()
+  	end    
+})
+Player:AddButton({
+	Name = "Invisible",
+	Callback = function()
+  	end    
+})
+Player:AddSection({
+    Name = "Tools:"
+})
+Player:AddToggle({
+	Name = "X-Ray",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Player:AddToggle({
+	Name = "Remove Barriers",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Player:AddToggle({
+	Name = "Unlock Camera",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Player:AddToggle({
+	Name = "Blurt Roles",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Player:AddToggle({
+	Name = "Void Protection",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Player:AddButton({
+	Name = "Less Lag",
+	Callback = function()
+  	end    
+})
+-- Loops --
+game:GetService("RunService").RenderStepped:connect(function()
+    if Chams then
+	    roles = game:GetService("ReplicatedStorage"):FindFirstChild("GetPlayerData", true):InvokeServer()
+	    for i, v in pairs(roles) do
+		    if v.Role == "Murderer" then
+			    Murder = i
+		    elseif v.Role == 'Sheriff'then
+			    Sheriff = i
+		    elseif v.Role == 'Hero'then
+			    Hero = i
+		    end
+	    end
+        CreateChams()
+	    UpdateChams()
+    else
+        for i, v in pairs(game:GetService("Players"):GetChildren()) do
+		    if v ~= game:GetService("Players").LocalPlayer and v.Character and v.Character:FindFirstChild("Highlight") then
+                v.Character:WaitForChild("Highlight"):Destroy()
             end
         end
     end
