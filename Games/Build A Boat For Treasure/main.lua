@@ -121,6 +121,24 @@ Visuals:AddToggle({
         end
 	end    
 })
+Visuals:AddToggle({
+	Name = "Eggs Chams",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
+Visuals:AddToggle({
+	Name = "Rare Eggs Chams",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+        else
+        end
+	end    
+})
 Visuals:AddSlider({
 	Name = "Chams Opacity",
 	Min = 0,
