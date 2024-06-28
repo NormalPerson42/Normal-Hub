@@ -12,7 +12,7 @@ end
 function CheckRank()
     if game.Players.LocalPlayer.Name == "PavelPasha4145" then
         Rank = "Tester"
-    elseif game.Players.LocalPlayer.Name == "spepan1309" tehn
+    elseif game.Players.LocalPlayer.Name == "spepan1309" then
         Rank = "Tester"
     end
 end
