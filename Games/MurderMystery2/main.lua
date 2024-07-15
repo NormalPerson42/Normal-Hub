@@ -1,22 +1,79 @@
-local Rank = "User"
+-- Variables | Everything --
+local RankV = "User"
+local roles
+local VersionV = "0.0.1"
+
+-- Variables | Visuals --
+--//ESP Section\\--
+local MurdererESPV = false
+local SheriffESPV = false
+local InnocentESPV = false
+local HeroESPV = false
+local CoinsESPV = false
+local EggsESPV = false
+local RareEggsESPV = false
+local GunDropESPV = false
+--//Chams Section\\--
+local Chams = false
+local MurdererChamsV = false
+local SheriffChamsV = false
+local InnocentChamsV = false
+local HeroChamsV = false
+local CoinsChamsV = false
+local EggsChamsV = false
+local RareEggsChamsV = false
+local GunDropChamsV = false
+local Chams_Opacity = 50
+--//Effects Section\\--
+local InstantRoleNotifyV = false
+local SeeDeadChatV = false
+local LoopAllInteractV = false
+local MuteOtherRadiosV = false
+
+-- Variables | Player --
+--//Player Mods Section\\--
+local FlyingV = false
+local FlyV = 1
+local CtrlClickTPV = false
+local InfJumpV = false
+local NoclipV = false
+local ShiftToRunV = false
+local WalkSpeedV = 16
+local JumpPowerV = 50
+--//Tools Section\\--
+local XrayV = false
+local RemoveBarriersV = false
+local UnlockCameraV = false
+local BlurtRolesV = false
+local VoidProtectionV = false
 
 -- Set Up Some things --
 if game.Players.LocalPlayer.Name == "robloxisdown596" then
-    Rank = "Owner's Alt"
+    RankV = "Owner"
 elseif game.Players.LocalPlayer.Name == "EVA12VIRA" then
-    Rank = "Owner"
-elseif game.Players.LocalPlayer.Name == "EVA12VIRA_alt" then
-    Rank = "Owner's Alt"
+    RankV = "Owner"
 elseif game.Players.LocalPlayer.Name == "spepan1309" then 
-    Rank = "Tester"
+    RankV = "Tester"
 elseif game.Players.LocalPlayer.Name == "PavelPasha4145" then 
-    Rank = "Tester"
+    RankV = "Tester"
 end
 
+-- Functions --
+function IsAlive(Player)
+	for i, v in pairs(roles) do
+		if Player.Name == i then
+			if not v.Killed and not v.Dead then
+				return true
+			else
+				return false
+			end
+		end
+	end
+end
 function LoadUI()
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/main/Games/MurderMystery2/ModifiedUI.lua"))()
-local NormalHubWm = library:Watermark("Normal Hub | v0.0.1")  
-local RankWm = NormalHubWm:AddWatermark("Rank: " .. Rank)
+local NormalHubWm = library:Watermark("Normal Hub | v"..VersionV)  
+local RankWm = NormalHubWm:AddWatermark("Rank: " .. RankV)
 
 local Notif = library:InitNotifications()
 
@@ -55,16 +112,7 @@ local InnocentESPToggle = VisualsTab:NewToggle("Innocent ESP", false, function(v
 
     end
 end)
-
 local HeroESPToggle = VisualsTab:NewToggle("Hero ESP", false, function(value)
-    if value then
-
-    else
-
-    end
-end)
-
-local TrapESPToggle = VisualsTab:NewToggle("Trap ESP", false, function(value)
     if value then
 
     else
@@ -80,7 +128,15 @@ local CoinsESPToggle = VisualsTab:NewToggle("Coins ESP", false, function(value)
     end
 end)
 
-local BeachBallsESPToggle = VisualsTab:NewToggle("Beach Balls ESP", false, function(value)
+local EggsESPToggle = VisualsTab:NewToggle("Eggs ESP", false, function(value)
+    if value then
+
+    else
+
+    end
+end)
+
+local RareEggsESPToggle = VisualsTab:NewToggle("Rare Eggs ESP", false, function(value)
     if value then
 
     else
@@ -97,6 +153,14 @@ local GunDropESPToggle = VisualsTab:NewToggle("Gun Drop ESP", false, function(va
 end)
 
 local ChamsSection = VisualsTab:NewSection("Chams")
+
+local AllChamsToggle = VisualsTab:NewToggle("All Chams", false, function(value)
+    if value then
+        Chams = true
+    else
+        Chams = false
+    end
+end)
 
 local MurdererChamsToggle = VisualsTab:NewToggle("Murderer Chams", false, function(value)
     if value then
@@ -130,14 +194,6 @@ local HeroChamsToggle = VisualsTab:NewToggle("Hero Chams", false, function(value
     end
 end)
 
-local TrapChamsToggle = VisualsTab:NewToggle("Trap Chams", false, function(value)
-    if value then
-
-    else
-
-    end
-end)
-
 local CoinsChamsToggle = VisualsTab:NewToggle("Coins Chams", false, function(value)
     if value then
 
@@ -146,7 +202,15 @@ local CoinsChamsToggle = VisualsTab:NewToggle("Coins Chams", false, function(val
     end
 end)
 
-local BeachBallsChamsToggle = VisualsTab:NewToggle("Beach Balls Chams", false, function(value)
+local EggsChamsToggle = VisualsTab:NewToggle("Eggs Chams", false, function(value)
+    if value then
+
+    else
+
+    end
+end)
+
+local RareEggsChamsToggle = VisualsTab:NewToggle("Rare Eggs Chams", false, function(value)
     if value then
 
     else
@@ -163,7 +227,7 @@ local GunDropChamsToggle = VisualsTab:NewToggle("Gun Drop Chams", false, functio
 end)
 
 local ChamsOpacitySlider = VisualsTab:NewSlider("Chams Opacity", "", true, "/", {min = 0, max = 100, default = 50}, function(value)
-    
+    Chams_Opacity = value
 end)
 
 local EffectsSection = VisualsTab:NewSection("Effects")
@@ -213,7 +277,7 @@ local FlyToggle = PlayerTab:NewToggle("Toggle Fly", false, function(value)
 end)
 
 local FlySpeedTextBox = PlayerTab:NewTextbox("Fly Speed", "", "1", "all", "small", true, false, function(val)
-    
+    FlyV = val
 end)
 
 local CtrlClickTPToggle = PlayerTab:NewToggle("Toggle Ctrl Click TP", false, function(value)
@@ -249,11 +313,11 @@ local ShiftRunToggle = PlayerTab:NewToggle("Toggle Shift Run", false, function(v
 end)
 
 local WalkSpeedTextBox = PlayerTab:NewTextbox("Walk Speed", "", "16", "all", "small", true, false, function(val)
-    
+    WalkSpeedV = val
 end)
 
 local JumpPowerTextBox = PlayerTab:NewTextbox("Jump Power", "", "50", "all", "small", true, false, function(val)
-    
+    JumpPowerV = val
 end)
 
 local GodModeButton = PlayerTab:NewButton("God Mode", function()
@@ -367,56 +431,10 @@ local RejoinButton = TeleportTab:NewButton("Rejoin", function()
 end)
 
 local SwitchServersButton = TeleportTab:NewButton("Switch Servers", function()
-    game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.Players.LocalPlayer)
+    
 end)
 
 local FreeEmotesTab = Init:NewTab("Free Emotes")
-
-local SitButton = FreeEmotesTab:NewButton("Sit", function()
-    
-end)
-
-local NinjaButton = FreeEmotesTab:NewButton("Ninja", function()
-    
-end)
-
-local DabButton = FreeEmotesTab:NewButton("Dab", function()
-    
-end)
-
-local FlossButton = FreeEmotesTab:NewButton("Floss", function()
-    
-end)
-
-local ZenButton = FreeEmotesTab:NewButton("Zen", function()
-    
-end)
-
-local ZombieButton = FreeEmotesTab:NewButton("Zombie", function()
-    
-end)
-
-local HeadlessButton = FreeEmotesTab:NewButton("Headless", function()
-    
-end)
-
-local SeizureButton = FreeEmotesTab:NewButton("Seizure", function()
-    
-end)
-
-local DefaultEmotesSection = FreeEmotesTab:NewSection("Default Emotes")
-
-local WaveButton = FreeEmotesTab:NewButton("Wave", function()
-    
-end)
-
-local CheerButton = FreeEmotesTab:NewButton("Cheer", function()
-    
-end)
-
-local LaughButton = FreeEmotesTab:NewButton("Laugh", function()
-    
-end)
 
 local AutoFarmTab = Init:NewTab("Auto-Farm")
 
@@ -426,3 +444,56 @@ local FinishedLoading = Notif:Notify("Loaded Normal Hub, Enjoy!", 4, "success")
 end
 
 LoadUI()
+
+-- Loops --
+--//Set up walkspeed & jumppower\\--
+game:GetService("RunService").RenderStepped:Connect(function()
+    if game.Players.LocalPlayer.Character then
+        if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = WalkSpeedV
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = JumpPowerV
+        end
+    end
+end)
+
+--//Set up All Chams\\--
+game:GetService("RunService").RenderStepped:connect(function()
+    if Chams then
+	    roles = game:GetService("ReplicatedStorage"):FindFirstChild("GetPlayerData", true):InvokeServer()
+	    for i, v in pairs(roles) do
+		    if v.Role == "Murderer" then
+			    Murder = i
+		    elseif v.Role == 'Sheriff'then
+			    Sheriff = i
+		    elseif v.Role == 'Hero'then
+			    Hero = i
+		    end
+	    end
+        for i, v in pairs(game:GetService("Players"):GetChildren()) do
+		    if v ~= game:GetService("Players").LocalPlayer and v.Character and not v.Character:FindFirstChild("Highlight") then
+                Instance.new("Highlight", v.Character)      
+		    end
+	    end 
+	    for _, v in pairs(game:GetService("Players"):GetChildren()) do
+		    if v ~= game:GetService("Players").LocalPlayer and v.Character and v.Character:FindFirstChild("Highlight") then
+			    Highlight = v.Character:FindFirstChild("Highlight")
+                Highlight.FillTransparency = Chams_Opacity / 100
+			    if v.Name == Sheriff and IsAlive(v) then
+				    Highlight.FillColor = Color3.fromRGB(0, 0, 225)
+			    elseif v.Name == Murder and IsAlive(v) then
+				    Highlight.FillColor = Color3.fromRGB(225, 0, 0)
+			    elseif v.Name == Hero and IsAlive(v) and not IsAlive(game:GetService("Players")[Sheriff]) then
+				    Highlight.FillColor = Color3.fromRGB(255, 250, 0)
+			    else
+				    Highlight.FillColor = Color3.fromRGB(0, 225, 0)
+			    end
+		    end
+	    end
+    else
+        for i, v in pairs(game:GetService("Players"):GetChildren()) do
+		    if v ~= game:GetService("Players").LocalPlayer and v.Character and v.Character:FindFirstChild("Highlight") then
+                v.Character:WaitForChild("Highlight"):Destroy()
+            end
+        end
+    end
+end)
