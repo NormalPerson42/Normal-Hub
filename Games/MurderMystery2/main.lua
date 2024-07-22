@@ -49,11 +49,11 @@ local Key = " "
 
 -- Functions --
 function MinimizeUI()
-	
+
 end
 
 function MaximizeUI()
-	
+
 end
 
 function CloseUI()
@@ -85,7 +85,18 @@ function GetKey()
 end
 
 function CheckKey()
-	
+	if KeyInput.Text == "123" then
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "Correct Key!";
+			Text = "Thanks for getting the key! Enjoy your 48 hours trial key!"
+		})
+		ScreenGui:Destroy()
+	else
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "Wrong Key!";
+			Text = "This key has expired or is incorrect."
+		})
+	end
 end
 
 ScreenGui.Name = ""
@@ -272,6 +283,10 @@ CheckKeyButton.Text = "Check Key"
 CheckKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 CheckKeyButton.TextSize = 25.000
 CheckKeyButton.TextWrapped = true
+
+CheckKeyButton.MouseButton1Click:Connect(function()
+	CheckKey()
+end)
 
 UIStroke_12.Parent = CheckKeyButton
 UIStroke_12.Color = Color3.fromRGB(255, 255, 255)
@@ -474,7 +489,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	function SetKeyToInput()
 		Key = KeyInput.Text
 	end
-	
+
 	SetKeyToInput()
 	RandomName()
 end)
