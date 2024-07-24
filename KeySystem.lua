@@ -123,6 +123,8 @@ function CheckKey()
 			Duration = 5
 		})
 		ScreenGui:Destroy()
+		wait(0.5)
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/main/MainMenu.lua"))()
 	else
 		game:GetService("StarterGui"):SetCore("SendNotification", {
 			Title = "Wrong Key!",
