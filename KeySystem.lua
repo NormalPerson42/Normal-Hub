@@ -1,5 +1,14 @@
-if _G.ProtectedByNHffgfgfdgdsfgjsfdgjsfdgjsfdgjsflkdgksfldgskfdgjdfghauighuidngvguifdhgfdhvgjvgnsjvngfhdg483t78347853475817459813759813478513478571349857139587143598314573498571345793487598134598134759834759348758314597314853148513479534851735971345713485783475914857148515345h287myr2v7y79g4ght4gh3t8ugh3t8ht38gh83t5gh35nhb57y758yb45yb9v5yvgu58gt8jgu5hg75vg58gny59gy7nh75nyhhb9n57hy9y6nh9xmh9 == true then
-	error("Normal Hub Is Already Running! Please Close the old ui to execute it again! Full ReExecute Support Coming in V2 Key System!")
+if _G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio == true then
+	_G.fgsdfgfhjfhhgkjjfgdfgdgdfgsfdgfdsgfdsgfdsgsfdgsfdgdsfgfsdgdsfgsdf = true
+end
+
+if isfolder("Normal Hub") then
+    if isfile("Normal Hub/key.txt") then
+        local key = readfile("Normal Hub/key.txt")
+        if key == "Saved" then
+            error("Key Checked!")         
+        end
+    end
 end
 
 local BannesUsersList = loadstring(game:HttpGet("https://pastebin.com/raw/jtQRFVFd"))()
@@ -12,6 +21,7 @@ end
 -- Instances --
 local ScreenGui = Instance.new("ScreenGui")
 local KeyInputFrame = Instance.new("Frame")
+local FakeFrame = Instance.new("Frame")
 local CopyButton = Instance.new("TextButton")
 local Frame = Instance.new("Frame")
 local CoverFrame = Instance.new("Frame")
@@ -39,6 +49,7 @@ local DiscordServerButton = Instance.new("TextButton")
 local UICorner_8 = Instance.new("UICorner")
 local UICorner_9 = Instance.new("UICorner")
 local UICorner_10 = Instance.new("UICorner")
+local UICorner_11 = Instance.new("UICorner")
 local HWIDLabel = Instance.new("TextLabel")
 local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
 local HWID = Instance.new("TextLabel")
@@ -58,16 +69,35 @@ local UIStroke_13 = Instance.new("UIStroke")
 local UIStroke_14 = Instance.new("UIStroke")
 local UIStroke_15 = Instance.new("UIStroke")
 local UIStroke_16 = Instance.new("UIStroke")
+_G.fgsdfgfhjfhhgkjjfgdfgdgdfgsfdgfdsgfdsgfdsgsfdgsfdgdsfgfsdgdsfgsdf = false
 
 -- Functions --
 function MinimizeUI()
-	CoverFrame.Visible = false
+    FakeFrame.Visible = true
+    FakeFrame:TweenSize(UDim2.new(0, 523, 0, 0),
+        Enum.EasingDirection.Out,
+        Enum.EasingStyle.Sine,
+        0.3,
+        false
+    )
+    CoverFrame.Visible = false
 	Frame.Size = UDim2.new(0, 523, 0, 26)
+	wait(0.3)
+	FakeFrame.Visible = false
 	MinimizeButton.Text = "+"
 	MinimizeButton.Position = UDim2.new(0.923, 0, 0.085, 0)
 end
 
 function MaximizeUI()
+    FakeFrame.Visible = true
+    FakeFrame:TweenSize(UDim2.new(0, 523, 0, 129),
+        Enum.EasingDirection.Out,
+        Enum.EasingStyle.Sine,
+        0.3,
+        false
+    )
+    wait(0.3)
+	FakeFrame.Visible = false
 	Frame.Size = UDim2.new(0, 523, 0, 164)
 	CoverFrame.Visible = true
 	MinimizeButton.Text = "-"
@@ -76,7 +106,7 @@ end
 
 function CloseUI()
 	ScreenGui:Destroy()
-	_G.ProtectedByNHffgfgfdgdsfgjsfdgjsfdgjsfdgjsflkdgksfldgskfdgjdfghauighuidngvguifdhgfdhvgjvgnsjvngfhdg483t78347853475817459813759813478513478571349857139587143598314573498571345793487598134598134759834759348758314597314853148513479534851735971345713485783475914857148515345h287myr2v7y79g4ght4gh3t8ugh3t8ht38gh83t5gh35nhb57y758yb45yb9v5yvgu58gt8jgu5hg75vg58gny59gy7nh75nyhhb9n57hy9y6nh9xmh9 = false
+	_G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio = false
 end
 
 function SetInputToClipboard()
@@ -121,6 +151,15 @@ function DiscordServer()
 	})
 end
 
+function SaveKey()
+    local Key = KeyInput.Text
+    if isfolder("Normal Hub") then
+        delfolder("Normal Hub")
+    end
+    makefolder("Normal Hub")
+    writefile("Normal Hub/key.txt", "Saved")
+end
+
 function CheckKey()
 	if KeyInput.Text == "123abc" then
 		game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -130,7 +169,8 @@ function CheckKey()
 			Duration = 5
 		})
 		ScreenGui:Destroy()
-		_G.ProtectedByNHffgfgfdgdsfgjsfdgjsfdgjsfdgjsflkdgksfldgskfdgjdfghauighuidngvguifdhgfdhvgjvgnsjvngfhdg483t78347853475817459813759813478513478571349857139587143598314573498571345793487598134598134759834759348758314597314853148513479534851735971345713485783475914857148515345h287myr2v7y79g4ght4gh3t8ugh3t8ht38gh83t5gh35nhb57y758yb45yb9v5yvgu58gt8jgu5hg75vg58gny59gy7nh75nyhhb9n57hy9y6nh9xmh9 = false
+		_G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio = false
+		SaveKey()
 		wait(0.5)
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/main/MainMenu.lua"))()
 	else
@@ -143,12 +183,12 @@ function CheckKey()
 	end
 end
 
-_G.ProtectedByNHffgfgfdgdsfgjsfdgjsfdgjsfdgjsflkdgksfldgskfdgjdfghauighuidngvguifdhgfdhvgjvgnsjvngfhdg483t78347853475817459813759813478513478571349857139587143598314573498571345793487598134598134759834759348758314597314853148513479534851735971345713485783475914857148515345h287myr2v7y79g4ght4gh3t8ugh3t8ht38gh83t5gh35nhb57y758yb45yb9v5yvgu58gt8jgu5hg75vg58gny59gy7nh75nyhhb9n57hy9y6nh9xmh9 = true
+_G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio = true
 
 -- Properties --
 
 ScreenGui.Name = " "
-ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui
+ScreenGui.Parent = game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false
 ScreenGui.IgnoreGuiInset = true
@@ -173,6 +213,16 @@ CoverFrame.Position = UDim2.new(0, 0, 0.213160232, 0)
 CoverFrame.Size = UDim2.new(0, 523, 0, 129)
 
 UICorner.Parent = CoverFrame
+
+FakeFrame.Parent = Frame
+FakeFrame.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+FakeFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+FakeFrame.BorderSizePixel = 0
+FakeFrame.Position = UDim2.new(0, 0, 0.213160232, 0)
+FakeFrame.Size = UDim2.new(0, 523, 0, 129)
+FakeFrame.Visible = false
+
+UICorner_11.Parent = FakeFrame
 
 GetKeyButton.Name = "GetKeyButton"
 GetKeyButton.Parent = CoverFrame
@@ -599,4 +649,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		UIStroke_16.Name = math.random(100000000, 999999999)
 	end
 	RandomName()
+	if _G.fgsdfgfhjfhhgkjjfgdfgdgdfgsfdgfdsgfdsgfdsgsfdgsfdgdsfgfsdgdsfgsdf == true then
+	    ScreenGui:Destroy()
+	end
 end)
