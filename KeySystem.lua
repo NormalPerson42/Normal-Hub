@@ -1,3 +1,7 @@
+if _G.NHRunning then
+    error("Normal Hub | Key System Is Already Running! Close the gui to execute the script again!")
+end
+
 local BannesUsersList = loadstring(game:HttpGet("https://pastebin.com/raw/jtQRFVFd"))()
 for i,v in pairs(BannesUsersList) do
 	if v == game.Players.LocalPlayer.Name then
@@ -52,6 +56,7 @@ local UIStroke_12 = Instance.new("UIStroke")
 local UIStroke_13 = Instance.new("UIStroke")
 local UIStroke_14 = Instance.new("UIStroke")
 local UIStroke_15 = Instance.new("UIStroke")
+_G.NHRunning = true
 
 -- Functions --
 function MinimizeUI()
@@ -70,6 +75,7 @@ end
 
 function CloseUI()
 	ScreenGui:Destroy()
+	_G.NHRunning = false
 end
 
 function SetInputToClipboard()
