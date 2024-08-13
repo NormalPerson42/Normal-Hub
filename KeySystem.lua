@@ -130,6 +130,7 @@ function CheckKey()
 			Duration = 5
 		})
 		ScreenGui:Destroy()
+		_G.ProtectedByNHffgfgfdgdsfgjsfdgjsfdgjsfdgjsflkdgksfldgskfdgjdfghauighuidngvguifdhgfdhvgjvgnsjvngfhdg483t78347853475817459813759813478513478571349857139587143598314573498571345793487598134598134759834759348758314597314853148513479534851735971345713485783475914857148515345h287myr2v7y79g4ght4gh3t8ugh3t8ht38gh83t5gh35nhb57y758yb45yb9v5yvgu58gt8jgu5hg75vg58gny59gy7nh75nyhhb9n57hy9y6nh9xmh9 = false
 		wait(0.5)
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/main/MainMenu.lua"))()
 	else
