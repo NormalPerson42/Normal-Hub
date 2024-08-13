@@ -1,5 +1,5 @@
-if _G.NHRunning then
-    error("Normal Hub | Key System Is Already Running! Close the gui to execute the script again!")
+if _G.ProtectedByNHffgfgfdgdsfgjsfdgjsfdgjsfdgjsflkdgksfldgskfdgjdfghauighuidngvguifdhgfdhvgjvgnsjvngfhdg483t78347853475817459813759813478513478571349857139587143598314573498571345793487598134598134759834759348758314597314853148513479534851735971345713485783475914857148515345h287myr2v7y79g4ght4gh3t8ugh3t8ht38gh83t5gh35nhb57y758yb45yb9v5yvgu58gt8jgu5hg75vg58gny59gy7nh75nyhhb9n57hy9y6nh9xmh9 == true then
+	error("Normal Hub Is Already Running! Please Close the old ui to execute it again! Full ReExecute Support Coming in V2 Key System!")
 end
 
 local BannesUsersList = loadstring(game:HttpGet("https://pastebin.com/raw/jtQRFVFd"))()
@@ -11,6 +11,7 @@ end
 
 -- Instances --
 local ScreenGui = Instance.new("ScreenGui")
+local KeyInputFrame = Instance.new("Frame")
 local CopyButton = Instance.new("TextButton")
 local Frame = Instance.new("Frame")
 local CoverFrame = Instance.new("Frame")
@@ -37,6 +38,7 @@ local UICorner_7 = Instance.new("UICorner")
 local DiscordServerButton = Instance.new("TextButton")
 local UICorner_8 = Instance.new("UICorner")
 local UICorner_9 = Instance.new("UICorner")
+local UICorner_10 = Instance.new("UICorner")
 local HWIDLabel = Instance.new("TextLabel")
 local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
 local HWID = Instance.new("TextLabel")
@@ -46,7 +48,6 @@ local UIStroke_2 = Instance.new("UIStroke")
 local UIStroke_3 = Instance.new("UIStroke")
 local UIStroke_4 = Instance.new("UIStroke")
 local UIStroke_5 = Instance.new("UIStroke")
-local UIStroke_6 = Instance.new("UIStroke")
 local UIStroke_7 = Instance.new("UIStroke")
 local UIStroke_8 = Instance.new("UIStroke")
 local UIStroke_9 = Instance.new("UIStroke")
@@ -56,7 +57,7 @@ local UIStroke_12 = Instance.new("UIStroke")
 local UIStroke_13 = Instance.new("UIStroke")
 local UIStroke_14 = Instance.new("UIStroke")
 local UIStroke_15 = Instance.new("UIStroke")
-_G.NHRunning = true
+local UIStroke_16 = Instance.new("UIStroke")
 
 -- Functions --
 function MinimizeUI()
@@ -75,7 +76,7 @@ end
 
 function CloseUI()
 	ScreenGui:Destroy()
-	_G.NHRunning = false
+	_G.ProtectedByNHffgfgfdgdsfgjsfdgjsfdgjsfdgjsflkdgksfldgskfdgjdfghauighuidngvguifdhgfdhvgjvgnsjvngfhdg483t78347853475817459813759813478513478571349857139587143598314573498571345793487598134598134759834759348758314597314853148513479534851735971345713485783475914857148515345h287myr2v7y79g4ght4gh3t8ugh3t8ht38gh83t5gh35nhb57y758yb45yb9v5yvgu58gt8jgu5hg75vg58gny59gy7nh75nyhhb9n57hy9y6nh9xmh9 = false
 end
 
 function SetInputToClipboard()
@@ -141,10 +142,12 @@ function CheckKey()
 	end
 end
 
+_G.ProtectedByNHffgfgfdgdsfgjsfdgjsfdgjsfdgjsflkdgksfldgskfdgjdfghauighuidngvguifdhgfdhvgjvgnsjvngfhdg483t78347853475817459813759813478513478571349857139587143598314573498571345793487598134598134759834759348758314597314853148513479534851735971345713485783475914857148515345h287myr2v7y79g4ght4gh3t8ugh3t8ht38gh83t5gh35nhb57y758yb45yb9v5yvgu58gt8jgu5hg75vg58gny59gy7nh75nyhhb9n57hy9y6nh9xmh9 = true
+
 -- Properties --
 
 ScreenGui.Name = " "
-ScreenGui.Parent = game.CoreGui
+ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false
 ScreenGui.IgnoreGuiInset = true
@@ -263,6 +266,19 @@ UIStroke_3.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
 UICorner_4.Parent = GetPremiumButton
 
+KeyInputFrame.Parent = CoverFrame
+KeyInputFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+KeyInputFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+KeyInputFrame.BorderSizePixel = 0
+KeyInputFrame.Position = UDim2.new(0.0188863538, 0, 0.0652399585, 0)
+KeyInputFrame.Size = UDim2.new(0, 462, 0, 39)
+
+UICorner_10.Parent = KeyInputFrame
+
+UIStroke_16.Parent = KeyInputFrame
+UIStroke_16.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_16.Color = Color3.fromRGB(50, 50, 50)
+
 CheckKeyButton.Name = "CheckKeyButton"
 CheckKeyButton.Parent = CoverFrame
 CheckKeyButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
@@ -322,26 +338,23 @@ UIStroke_5.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 UICorner_6.Parent = ClipboardButton
 
 KeyInput.Name = "KeyInput"
-KeyInput.Parent = CoverFrame
+KeyInput.Parent = KeyInputFrame
 KeyInput.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 KeyInput.BorderColor3 = Color3.fromRGB(0, 0, 0)
 KeyInput.BorderSizePixel = 0
-KeyInput.Position = UDim2.new(0.0196904317, 0, 0.0574880205, 0)
-KeyInput.Size = UDim2.new(0, 463, 0, 40)
+KeyInput.Position = UDim2.new(0.046, 0, 0, 0)
+KeyInput.Size = UDim2.new(0, 440, 0, 38)
 KeyInput.ClearTextOnFocus = false
 KeyInput.Font = Enum.Font.SourceSans
 KeyInput.MultiLine = false
 KeyInput.TextScaled = true
+KeyInput.PlaceholderColor3 = Color3.fromRGB(91, 91, 91)
 KeyInput.PlaceholderText = "Enter Key..."
 KeyInput.Text = ""
 KeyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
 KeyInput.TextSize = 20.000
 KeyInput.TextWrapped = true
 KeyInput.TextXAlignment = Enum.TextXAlignment.Left
-
-UIStroke_6.Parent = KeyInput
-UIStroke_6.Color = Color3.fromRGB(50, 50, 50)
-UIStroke_6.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
 UICorner_7.Parent = KeyInput
 
@@ -535,6 +548,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	function RandomName()
 		ScreenGui.Name = math.random(100000000, 999999999)
 		Frame.Name = math.random(100000000, 999999999)
+		KeyInputFrame.Name = math.random(100000000, 999999999)
 		CoverFrame.Name = math.random(100000000, 999999999)
 		UICorner.Name = math.random(100000000, 999999999)
 		MinimizeButton.Name = math.random(100000000, 999999999)
@@ -554,6 +568,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		UICorner_7.Name = math.random(100000000, 999999999)
 		UICorner_8.Name = math.random(100000000, 999999999)
 		UICorner_9.Name = math.random(100000000, 999999999)
+		UICorner_10.Name = math.random(100000000, 999999999)
 		HWID.Name = math.random(100000000, 999999999)
 		HWIDLabel.Name = math.random(100000000, 999999999)
 		ExitButton.Name = math.random(100000000, 999999999)
@@ -569,7 +584,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		UIStroke_3.Name = math.random(100000000, 999999999)
 		UIStroke_4.Name = math.random(100000000, 999999999)
 		UIStroke_5.Name = math.random(100000000, 999999999)
-		UIStroke_6.Name = math.random(100000000, 999999999)
 		UIStroke_7.Name = math.random(100000000, 999999999)
 		UIStroke_8.Name = math.random(100000000, 999999999)
 		UIStroke_9.Name = math.random(100000000, 999999999)
@@ -581,6 +595,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		UIStroke_13.Name = math.random(100000000, 999999999)
 		UIStroke_14.Name = math.random(100000000, 999999999)
 		UIStroke_15.Name = math.random(100000000, 999999999)
+		UIStroke_16.Name = math.random(100000000, 999999999)
 	end
 	RandomName()
 end)
