@@ -1,3 +1,227 @@
+local isfolder1 = false
+local isfolder2 = false
+local writefile1 = false
+local writefile2 = false
+local isfile1 = false
+local isfile2 = false
+local isfile3 = false
+local loadstring1 = false
+local loadstring2 = false
+local loadstring3 = false
+local getclipboard1 = false
+local getclipboard2 = false
+_G.NormalHubUNCCheck = {
+	isfolder = "❌",
+	delfolder = "❌",
+	makefolder = "❌",
+	writefile = "❌",
+	isfile = "❌",
+	readfile = "❌",
+	loadstring = "❌",
+	getclipboard = "❌",
+	setclipboard = "❌"
+}
+
+-- Tests folder
+if isfolder and makefolder and delfolder then
+	if isfolder("Normal Hub Tests") then
+		delfolder("Normal Hub Tests")
+	end
+	makefolder("Normal Hub Tests")
+end
+
+-- Check Functions
+
+--//isfolder\\--
+if isfolder("Normal Hub Tests") == true then
+	isfolder1 = true
+else
+	isfolder1 = false
+end
+
+if isfolder("Normal Hub Tests/sigmamealpdf.exe") == false then
+	isfolder2 = true
+else
+	isfolder2 = false
+end
+
+if isfolder1 == true and isfolder2 == true then
+	_G.NormalHubUNCCheck.isfolder = "✅"
+end
+
+--//delfolder\\--
+if makefolder then
+	makefolder("Normal Hub Tests/delfolder")	
+end
+
+if delfolder then
+	delfolder("Normal Hub Tests/delfolder")
+end
+
+if isfolder("Normal Hub Tests/delfolder") == false then
+	_G.NormalHubUNCCheck.delfolder = "✅"
+else
+	_G.NormalHubUNCCheck.delfolder = "❌"
+end
+
+--//makefolder\\--
+if makefolder then
+	makefolder("Normal Hub Tests/makefolder")
+end
+
+if isfolder("Normal Hub Tests/makefolder") then
+	_G.NormalHubUNCCheck.makefolder = "✅"
+else
+	_G.NormalHubUNCCheck.makefolder = "❌"
+end
+
+--//writefile\\--
+if writefile then
+	writefile("Normal Hub Tests/writefile.txt", "pass")
+end
+
+if readfile("Normal Hub Tests/writefile.txt") == "pass" then
+	writefile1 = true
+else
+	writefile2 = false
+end
+
+local reqfileext = pcall(function()
+	if writefile then
+		writefile("Normal Hub Tests/writefile", "pass")
+	end
+
+	if isfile("Normal Hub Tests/writefile.txt") then
+	end
+end)
+
+if not reqfileext then
+	writefile2 = false
+else
+	writefile2 = true
+end
+
+if writefile1 == true and writefile2 == true then
+	_G.NormalHubUNCCheck.writefile = "✅"
+else
+	_G.NormalHubUNCCheck.writefile = "❌"
+end
+
+--//isfile\\--
+if writefile then
+	writefile("Normal Hub Tests/isfile.txt", "pass")
+	if isfile("Normal Hub Tests/isfile.txt") == true then
+		isfile1 = true
+	else
+		isfile1 = false
+	end
+	if isfile("Normal Hub Tests") == false then
+		isfile2 = true
+	else
+		isfile2 = false
+	end
+	if isfile("Normal Hub Tests/sigmameal.exe") == false then
+		isfile3 = true
+	else
+		isfile3 = false
+	end
+end
+
+if isfile1 and isfile2 and isfile3 then
+	_G.NormalHubUNCCheck.isfile = "✅"
+else
+	_G.NormalHubUNCCheck.isfile = "❌"
+end
+
+--//readfile\\--
+if writefile then
+	writefile("Normal Hub Tests/readfile.txt", "sigma pass")
+	if readfile("Normal Hub Tests/readfile.txt") == "sigma pass" then
+		_G.NormalHubUNCCheck.readfile = "✅"
+	else
+		_G.NormalHubUNCCheck.readfile = "❌"
+	end
+end
+
+--//loadstring\\--
+local a = game:GetService("Players").LocalPlayer.Character.Animate
+local b = getscriptbytecode(a)
+local f = loadstring(b)
+
+if type(f) ~= "function" then
+	loadstring1 = true
+else
+	loadstring1 = false
+end
+
+if loadstring("return ... + 1")(1) == 2 then
+	loadstring2 = true
+else
+	loadstring2 = false
+end
+
+if type(select(2, loadstring("f"))) == "string" then
+	loadstring3 = true
+else
+	loadstring3 = false
+end
+
+if loadstring1 and loadstring2 and loadstring3 then
+	_G.NormalHubUNCCheck.loadstring = "✅"
+else
+	_G.NormalHubUNCCheck.loadstring = "❌"
+end
+
+--//setclipboard\\--
+if setclipboard and getclipboard then
+	local a1 = "U%*YVY*($YN(#$VY^(*Y^*$*(NTHRT($N*V*Y$T(*YYN&DYF(*DYF(*SDYF(*DY(*EYT*N*(G&E*G&EW*(&N*GNE(*GEGEWUHEW(GW"
+	local a2 = getclipboard()
+	setclipboard(a1)
+	if getclipboard() == a1 then
+		_G.NormalHubUNCCheck.setclipboard = "✅"
+	else
+		_G.NormalHubUNCCheck.setclipboard = "❌"
+	end
+	setclipboard(a2)
+end
+
+--//getclipboard\\--
+if setclipboard and getclipboard then
+	local a1 = "test getclipboard"
+	setclipboard(a1)
+	local a2 = getclipboard()
+	if type(a2) == "string" or "number" then
+		getclipboard1 = true
+	else
+		getclipboard1 = false
+	end
+	
+	if getclipboard() == a1 then
+		getclipboard2 = true
+	else
+		getclipboard2 = false
+	end
+end
+
+if getclipboard1 and getclipboard2 then
+	_G.NormalHubUNCCheck.getclipboard = "✅"
+else
+	_G.NormalHubUNCCheck.getclipboard = "❌"
+end
+
+print("Hello. Your executor doesn't/does support these functions")
+print("isfolder: ".._G.NormalHubUNCCheck.isfolder)
+print("delfolder: ".._G.NormalHubUNCCheck.delfolder)
+print("makefolder: ".._G.NormalHubUNCCheck.makefolder)
+print("writefile: ".._G.NormalHubUNCCheck.writefile)
+print("isfile: ".._G.NormalHubUNCCheck.isfile)
+print("readfile: ".._G.NormalHubUNCCheck.readfile)
+print("loadstring: ".._G.NormalHubUNCCheck.loadstring)
+print("getclipboard: ".._G.NormalHubUNCCheck.getclipboard .." -- Unstable. Uses setclipboard, May be supported!")
+print("setclipboard: ".._G.NormalHubUNCCheck.setclipboard .." -- Unstable. Uses getclipboard, May be supported!")
+
+delfolder("Normal Hub Tests")
+
 if _G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio == true then
 	_G.fgsdfgfhjfhhgkjjfgdfgdgdfgsfdgfdsgfdsgfdsgsfdgsfdgdsfgfsdgdsfgsdf = true
 end
@@ -646,7 +870,7 @@ end)
 
 -- Scripts --
 
--- Bypass Anti-Cheats (works 98% of the times)
+-- Bypass Anti-Cheats (works 95% of the times)
 game:GetService("RunService").RenderStepped:Connect(function()
 	function RandomName()
 		ScreenGui.Name = math.random(100000000, 999999999)
