@@ -646,7 +646,7 @@ end)
 
 -- Scripts --
 
--- Bypass Anti-Cheats (works 95% of the times)
+-- Bypass Anti-Cheats (works 98% of the times)
 game:GetService("RunService").RenderStepped:Connect(function()
 	function RandomName()
 		ScreenGui.Name = math.random(100000000, 999999999)
