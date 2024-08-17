@@ -157,7 +157,7 @@ function SaveKey()
         delfolder("Normal Hub")
     end
     makefolder("Normal Hub")
-    writefile("Normal Hub/key.txt", "Saved")
+    writefile("Normal Hub/key.txt", Key)
 end
 
 function CheckKey()
