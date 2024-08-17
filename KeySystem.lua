@@ -3,12 +3,12 @@ if _G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio == true then
 end
 
 if isfolder("Normal Hub") then
-    if isfile("Normal Hub/key.txt") then
-        local key = readfile("Normal Hub/key.txt")
-        if key == "Saved" then
-            error("Key Checked!")         
-        end
-    end
+	if isfile("Normal Hub/key.txt") then
+		local key = readfile("Normal Hub/key.txt")
+		if key == "Saved" then
+			error("Key Checked!")         
+		end
+	end
 end
 
 local BannesUsersList = loadstring(game:HttpGet("https://pastebin.com/raw/jtQRFVFd"))()
@@ -73,14 +73,14 @@ _G.fgsdfgfhjfhhgkjjfgdfgdgdfgsfdgfdsgfdsgfdsgsfdgsfdgdsfgfsdgdsfgsdf = false
 
 -- Functions --
 function MinimizeUI()
-    FakeFrame.Visible = true
-    FakeFrame:TweenSize(UDim2.new(0, 523, 0, 0),
-        Enum.EasingDirection.Out,
-        Enum.EasingStyle.Sine,
-        0.3,
-        false
-    )
-    CoverFrame.Visible = false
+	FakeFrame.Visible = true
+	FakeFrame:TweenSize(UDim2.new(0, 523, 0, 0),
+		Enum.EasingDirection.Out,
+		Enum.EasingStyle.Sine,
+		0.3,
+		false
+	)
+	CoverFrame.Visible = false
 	Frame.Size = UDim2.new(0, 523, 0, 26)
 	wait(0.3)
 	FakeFrame.Visible = false
@@ -89,14 +89,14 @@ function MinimizeUI()
 end
 
 function MaximizeUI()
-    FakeFrame.Visible = true
-    FakeFrame:TweenSize(UDim2.new(0, 523, 0, 129),
-        Enum.EasingDirection.Out,
-        Enum.EasingStyle.Sine,
-        0.3,
-        false
-    )
-    wait(0.3)
+	FakeFrame.Visible = true
+	FakeFrame:TweenSize(UDim2.new(0, 523, 0, 129),
+		Enum.EasingDirection.Out,
+		Enum.EasingStyle.Sine,
+		0.3,
+		false
+	)
+	wait(0.3)
 	FakeFrame.Visible = false
 	Frame.Size = UDim2.new(0, 523, 0, 164)
 	CoverFrame.Visible = true
@@ -152,12 +152,12 @@ function DiscordServer()
 end
 
 function SaveKey()
-    local Key = KeyInput.Text
-    if isfolder("Normal Hub") then
-        delfolder("Normal Hub")
-    end
-    makefolder("Normal Hub")
-    writefile("Normal Hub/key.txt", Key)
+	local Key = KeyInput.Text
+	if isfolder("Normal Hub") then
+		delfolder("Normal Hub")
+	end
+	makefolder("Normal Hub")
+	writefile("Normal Hub/key.txt", Key)
 end
 
 function CheckKey()
@@ -653,6 +653,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		Frame.Name = math.random(100000000, 999999999)
 		KeyInputFrame.Name = math.random(100000000, 999999999)
 		CoverFrame.Name = math.random(100000000, 999999999)
+		FakeFrame.Name = math.random(100000000, 999999999)
 		UICorner.Name = math.random(100000000, 999999999)
 		MinimizeButton.Name = math.random(100000000, 999999999)
 		BrandName.Name = math.random(100000000, 999999999)
@@ -672,6 +673,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		UICorner_8.Name = math.random(100000000, 999999999)
 		UICorner_9.Name = math.random(100000000, 999999999)
 		UICorner_10.Name = math.random(100000000, 999999999)
+		UICorner_11.Name = math.random(100000000, 999999999)
 		HWID.Name = math.random(100000000, 999999999)
 		HWIDLabel.Name = math.random(100000000, 999999999)
 		ExitButton.Name = math.random(100000000, 999999999)
@@ -702,6 +704,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	end
 	RandomName()
 	if _G.fgsdfgfhjfhhgkjjfgdfgdgdfgsfdgfdsgfdsgfdsgsfdgsfdgdsfgfsdgdsfgsdf == true then
-	    ScreenGui:Destroy()
+		ScreenGui:Destroy()
 	end
 end)
