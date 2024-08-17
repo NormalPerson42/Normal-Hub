@@ -13,7 +13,8 @@ function nh() -- makes it a function so you cant execute it instantly
 	if isfolder("Normal Hub") then
 		if isfile("Normal Hub/key.txt") then
 			local key = readfile("Normal Hub/key.txt")
-			if key == "Saved" then
+			if key == "123abc" then
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/main/MainMenu.lua"))()
 				error("Key Checked!")         
 			end
 		end
@@ -933,8 +934,9 @@ else
 	_G.NormalHubUNCCheck.getclipboard = "❌"
 end
 
+delfolder("Normal Hub Tests")
+
 if _G.NormalHubUNCCheck.isfolder == "✅" and _G.NormalHubUNCCheck.delfolder == "✅" and _G.NormalHubUNCCheck.makefolder == "✅" and _G.NormalHubUNCCheck.writefile == "✅" and _G.NormalHubUNCCheck.isfile == "✅" and _G.NormalHubUNCCheck.readfile == "✅" and _G.NormalHubUNCCheck.loadstring == "✅" and _G.NormalHubUNCCheck.getclipboard == "✅" and _G.NormalHubUNCCheck.setclipboard == "✅" then
-	delfolder("Normal Hub Tests")
 	print("Passed UNC Test!")
 else
 	local UNCWarning = Instance.new("ScreenGui")
@@ -974,12 +976,14 @@ else
 	UNCWarning.Parent = game.CoreGui
 	UNCWarning.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	UNCWarning.ResetOnSpawn = false
+	UNCWarning.IgnoreGuiInset = true
+	UNCWarning.DisplayOrder = 2147483647
 
 	Frame.Parent = UNCWarning
 	Frame.BackgroundColor3 = Color3.new(1, 0.635294, 0)
 	Frame.BorderColor3 = Color3.new(0, 0, 0)
 	Frame.BorderSizePixel = 0
-	Frame.Position = UDim2.new(0, 0, 0.0955249444, 0)
+	Frame.Position = UDim2.new(0.33, 0, 0.0755249444, 0)
 	Frame.Size = UDim2.new(0.359602958, 0, 0.856282294, 0)
 
 	local dragging
