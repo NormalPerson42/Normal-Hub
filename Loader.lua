@@ -12,7 +12,7 @@ local ProgressBar = Instance.new("Frame")
 local Frame = Instance.new("Frame")
 local UIStroke = Instance.new("UIStroke")
 
-_G.JDSfojofjajsksadsaldkasd = true
+_G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio = true
 
 NormalHubLoader.Name = "NormalHubLoader"
 NormalHubLoader.Parent = game.CoreGui
@@ -152,6 +152,7 @@ if not isfolder("Normal Hub") then
 			Output.Text = "Ready To Open!"
 			wait(1)
 			NormalHubLoader:Destroy()
+			_G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio = false
 		end
 	else
 		wait(math.random(0.3, 0.4))
@@ -175,6 +176,7 @@ if not isfolder("Normal Hub") then
 			Output.Text = "Ready To Open!"
 			wait(1)
 			NormalHubLoader:Destroy()
+			_G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio = false
 		end
 	end
 else
@@ -195,6 +197,7 @@ else
 			Output.Text = "Ready To Open!"
 			wait(1)
 			NormalHubLoader:Destroy()
+			_G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio = false
 		end
 	else
 		wait(math.random(0.3, 0.4))
@@ -218,6 +221,7 @@ else
 			Output.Text = "Ready To Open!"
 			wait(1)
 			NormalHubLoader:Destroy()
+			_G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio = false
 		end
 	end
 end
