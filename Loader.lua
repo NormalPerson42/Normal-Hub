@@ -12,6 +12,7 @@ local ProgressBar = Instance.new("Frame")
 local Frame = Instance.new("Frame")
 local UIStroke = Instance.new("UIStroke")
 
+_G.fgsdfgfhjfhhgkjjfgdfgdgdfgsfdgfdsgfdsgfdsgsfdgsfdgdsfgfsdgdsfgsdf = false
 _G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio = true
 
 NormalHubLoader.Name = "NormalHubLoader"
