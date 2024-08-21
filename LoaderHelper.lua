@@ -1,4 +1,6 @@
-local library = {}
+local library = {
+	version = 0.1
+}
 
 function library:DownloadFolders()
     makefolder("Normal Hub")
@@ -6,7 +8,7 @@ function library:DownloadFolders()
 		makefolder("Normal Hub/autoexec")
 		makefolder("Normal Hub/workspace")
 		makefolder("Normal Hub/scripts")
-		writefile("Normal Hub/version.txt", "0.1")
+		writefile("Normal Hub/version.txt", version)
 		writefile("Normal Hub/settings/TopMost.txt", "")
 		writefile("Normal Hub/settings/AutoInject.txt", "")
 		writefile("Normal Hub/settings/AutoExecute.txt", "")
