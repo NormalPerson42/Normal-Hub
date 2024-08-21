@@ -1,5 +1,5 @@
-if _G.JDSfojofjajsksadsaldkasd == true then
-	_G.dhddahaskdasjd = true
+if _G.jgrgiwerhgnvrehgngwerhiwgvgguwguweruvgnwrgvjfdagafdigoangrio == true then
+	_G.fgsdfgfhjfhhgkjjfgdfgdgdfgsfdgfdsgfdsgfdsgsfdgsfdgdsfgfsdgdsfgsdf = true
 end
 
 local NormalHubLoader = Instance.new("ScreenGui")
