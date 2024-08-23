@@ -1246,7 +1246,7 @@ function library:AddWindow(title, options)
 								if #textbox.Text > 0 then
 									pcall(callback, textbox.Text)
 									if textbox_options.clear then
-										textbox.Text = ""
+										textbox.Text = textbox.Text
 									end
 								end
 							end
