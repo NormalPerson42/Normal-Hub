@@ -1306,7 +1306,7 @@ function main:Begin(PROPS)
         
         if not showing then
             WindowElementContainer.Visible = false
-            WindowPanelIcon.ImageTransparency = 0
+            WindowPanelIcon.ImageTransparency = 0.3
             Window.BackgroundTransparency = 1
             ResizeAll.Visible = false
         else
