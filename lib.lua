@@ -580,10 +580,6 @@ local BaseAddons = {};
 do
     local Funcs = {};
 
-    function library:GetFuncs()
-	return Funcs
-    end
-
     function Funcs:AddColorPicker(Idx, Info)
         local ToggleLabel = self.TextLabel;
         -- local Container = self.Container;
@@ -1524,10 +1520,6 @@ local BaseGroupbox = {};
 
 do
     local Funcs = {};
-
-    function library:GetFuncs()
-	return Funcs
-    end
 
     function Funcs:AddBlank(Size)
         local Groupbox = self;
@@ -3855,6 +3847,10 @@ function Library:CreateWindow(...)
     local TransparencyCache = {};
     local Toggled = false;
     local Fading = false;
+
+    function library:GetFuncs()
+	return BaseAddons
+    end
 	
     function Library:Toggle()
         if Fading then
