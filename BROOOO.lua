@@ -3847,10 +3847,6 @@ function Library:CreateWindow(...)
     local TransparencyCache = {};
     local Toggled = false;
     local Fading = false;
-
-    function library:GetFuncs()
-	return BaseAddons
-    end
 	
     function Library:Toggle()
         if Fading then
