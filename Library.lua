@@ -580,6 +580,10 @@ local BaseAddons = {};
 do
     local Funcs = {};
 
+    function library:GetFuncs()
+	return Funcs
+    end
+
     function Funcs:AddColorPicker(Idx, Info)
         local ToggleLabel = self.TextLabel;
         -- local Container = self.Container;
