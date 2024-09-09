@@ -1525,6 +1525,10 @@ local BaseGroupbox = {};
 do
     local Funcs = {};
 
+    function library:GetFuncs()
+	return Funcs
+    end
+
     function Funcs:AddBlank(Size)
         local Groupbox = self;
         local Container = Groupbox.Container;
