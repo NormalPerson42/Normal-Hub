@@ -40,10 +40,12 @@ function CheckEnv()
 	end
 	function tableenv.CheckGetRenv()
 		if getrenv then
-			if getrenv()._G ~= _G then
-				return true
-			else
-				return false
+			if typeof(getrenv) == "function" then
+				if getrenv()._G ~= _G then
+					return true
+				else
+					return false
+				end
 			end
 		else
 			return false
