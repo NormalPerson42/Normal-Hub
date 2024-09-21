@@ -206,7 +206,7 @@ Status.BorderSizePixel = 0
 Status.Position = UDim2.new(0.021, 0, 0.4, 0)
 Status.Size = UDim2.new(0, 402, 0, 20)
 Status.Font = Enum.Font.SourceSans
-Status.Text = "..."
+Status.Text = "Launcher Starting..."
 Status.TextColor3 = Color3.fromRGB(255, 255, 255)
 Status.TextScaled = true
 Status.TextSize = 14.000
@@ -227,40 +227,51 @@ FillBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 FillBar.BorderSizePixel = 0
 FillBar.Size = UDim2.new(0, 0, 0, 23)
 
+wait(math.random(3, 6) / 10)
+
 Status.Text = "Checking & Adding Environment..."
-FillBar.Size = UDim2.new(0, 28, 0, 23)
-
-wait(math.random(1, 2))
-
+FillBar.Size = UDim2.new(0, 56, 0, 23)
 CheckEnv2(EnvTable)
 CreateEnv("CustomFunctions") -- custom naming env
 
-function UpdatesCheck()
-	local versioncheck = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/version.lua"))()
-	if vers ~= versioncheck then
-		return false
-	elseif vers == versioncheck then
-		return true
-	end
-end
+wait(math.random(6, 9) / 10)
 
 Status.Text = "Checking for Updates..."
-FillBar.Size = UDim2.new(0, 60, 0, 23)
+FillBar.Size = UDim2.new(0, 118, 0, 23)
 
-wait(math.random(1, 2))
+wait(math.random(2, 4) / 10)
 
 local versioncheck = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/version.lua"))()
 if vers ~= versioncheck then
 	RunningLatestVersion = true
 	Status.Text = "New update found! Running the latest version..."
-	FillBar.Size = UDim2.new(0, 60, 0, 23)
-	wait(math.random(1, 2))
+	FillBar.Size = UDim2.new(0, 160, 0, 23)
+	wait(math.random(3, 5) / 10)
 	LoadingScreen:Destroy()
-	wait(0.1)
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
 end
 
-if not RunningLatestVersion then -- if finds new updates doesnt let the script continue
+if not RunningLatestVersion then
+	Status.Text = "Checking Whitelist..."
+	FillBar.Size = UDim2.new(0, 204, 0, 23)
+	wait(math.random(4, 6) / 10)
+	local WhitelistTable = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/whitelist.lua"))()
+	for i,v in pairs(WhitelistTable) do
+		for _,thing in pairs(v) do
+			if game.Players.LocalPlayer.Name == thing then
+				game.Players.LocalPlayer:Kick("You have been blacklisted from Normal Hub!")
+			elseif game.Players.LocalPlayer.UserId == thing then
+				game.Players.LocalPlayer:Kick("You have been blacklisted from Normal Hub!")
+			end
+		end
+	end
 	Status.Text = "Checking for Authentication..."
-	FillBar.Size = UDim2.new(0, 96, 0, 23)
+	FillBar.Size = UDim2.new(0, 298, 0, 23)
+	wait(math.random(8, 12) / 10)
+	-- Auth checking --
+	wait(math.random(8, 12) / 10)
+	Status.Text = "Finished!"
+	FillBar.Size = UDim2.new(0, 401, 0, 23)
+	wait(math.random(9, 13) / 10)
+	LoadingScreen:Destroy()
 end
