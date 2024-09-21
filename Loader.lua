@@ -1,4 +1,4 @@
-game.Players.LocalPlayer:WaitForChild("PlayerGui").LoadingScreen:Destroy()
+--game.Players.LocalPlayer:WaitForChild("PlayerGui").LoadingScreen:Destroy()
 local vers = "0.3"
 local RunningLatestVersion = false
 
@@ -254,6 +254,9 @@ if vers ~= versioncheck then
 	RunningLatestVersion = true
 	Status.Text = "New update found! Running the latest version..."
 	FillBar.Size = UDim2.new(0, 60, 0, 23)
+	wait(math.random(1, 2))
+	LoadingScreen:Destroy()
+	wait(0.1)
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
 end
 
