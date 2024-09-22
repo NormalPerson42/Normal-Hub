@@ -288,8 +288,9 @@ end
 
 wait(math.random(2, 4) / 10)
 
+local versioncheck, WhitelistTable = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/constants.lua"))()
+
 if not Exitted then
-	local versioncheck = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/version.lua"))()
 	if vers ~= versioncheck then
 		RunningLatestVersion = true
 		Status.Text = "New update found! Running the latest version..."
@@ -306,7 +307,6 @@ if not Exitted then
 		FillBar.Size = UDim2.new(0, 204, 0, 23)
 		wait(math.random(4, 6) / 10)
 		if not Exitted then
-			local WhitelistTable = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/whitelist.lua"))()
 			for i,v in pairs(WhitelistTable) do
 				for _,thing in pairs(v) do
 					if game.Players.LocalPlayer.Name == thing then
