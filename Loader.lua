@@ -1,6 +1,7 @@
---game.Players.LocalPlayer:WaitForChild("PlayerGui").LoadingScreen:Destroy()
-local vers = "0.3"
+local vers = "0.3.1"
 local RunningLatestVersion = false
+local RunningKeySystem = false
+local Exitted = false
 
 local LoadingScreen = Instance.new("ScreenGui")
 local hello = Instance.new("Frame")
@@ -9,157 +10,7 @@ local titleig = Instance.new("TextLabel")
 local Status = Instance.new("TextLabel")
 local StatusBar = Instance.new("Frame")
 local FillBar = Instance.new("Frame")
-
-function CheckEnv()
-	local tableenv = {}
-	function tableenv.CheckDecompile()
-		if Decompile then
-			return true
-		else
-			return false
-		end
-	end
-	function tableenv.CheckGetGenv()
-		if getgenv then
-			if typeof(getgenv) == "function" then
-				getgenv().TESTGLOBAL = true
-				if getgenv().TESTGLOBAL then
-					getgenv().TESTGLOBAL = nil
-					return true
-				else
-					Status.Text = "Your executor failed to pass the GetGenv() test. Which means it cannot run Normal Hub. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
-					error("Your executor failed to pass the GetGenv() test. Which means it cannot run Normal Hub. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
-					return false
-				end
-			end
-		else
-			Status.Text = "Your executor failed to pass the GetGenv() test. Which means it cannot run Normal Hub. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
-			error("Your executor failed to pass the GetGenv() test. Which means it cannot run Normal Hub. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
-			return false
-		end
-	end
-	function tableenv.CheckGetRenv()
-		if getrenv then
-			if typeof(getrenv) == "function" then
-				if getrenv()._G ~= _G then
-					return true
-				else
-					return false
-				end
-			end
-		else
-			return false
-		end
-	end
-	return tableenv
-end
-function CreateEnv(argument)
-	if argument == "decompile" then
-		getgenv().Decompile = getgenv().decompile
-	end
-	if argument == "CustomFunctions" then
-		getgenv().syn = true
-		getgenv().isluau = function()
-			return true
-		end
-	end
-	if argument == "getrenv" then
-		local renv = {
-			print = print, warn = warn, error = error, assert = assert, collectgarbage = collectgarbage, require = require,
-			select = select, tonumber = tonumber, tostring = tostring, type = type, xpcall = xpcall,
-			pairs = pairs, next = next, ipairs = ipairs, newproxy = newproxy, rawequal = rawequal, rawget = rawget,
-			rawset = rawset, rawlen = rawlen, gcinfo = gcinfo,
-
-			coroutine = {
-				create = coroutine.create, resume = coroutine.resume, running = coroutine.running,
-				status = coroutine.status, wrap = coroutine.wrap, yield = coroutine.yield,
-			},
-
-			bit32 = {
-				arshift = bit32.arshift, band = bit32.band, bnot = bit32.bnot, bor = bit32.bor, btest = bit32.btest,
-				extract = bit32.extract, lshift = bit32.lshift, replace = bit32.replace, rshift = bit32.rshift, xor = bit32.xor,
-			},
-
-			math = {
-				abs = math.abs, acos = math.acos, asin = math.asin, atan = math.atan, atan2 = math.atan2, ceil = math.ceil,
-				cos = math.cos, cosh = math.cosh, deg = math.deg, exp = math.exp, floor = math.floor, fmod = math.fmod,
-				frexp = math.frexp, ldexp = math.ldexp, log = math.log, log10 = math.log10, max = math.max, min = math.min,
-				modf = math.modf, pow = math.pow, rad = math.rad, random = math.random, randomseed = math.randomseed,
-				sin = math.sin, sinh = math.sinh, sqrt = math.sqrt, tan = math.tan, tanh = math.tanh
-			},
-
-			string = {
-				byte = string.byte, char = string.char, find = string.find, format = string.format, gmatch = string.gmatch,
-				gsub = string.gsub, len = string.len, lower = string.lower, match = string.match, pack = string.pack,
-				packsize = string.packsize, rep = string.rep, reverse = string.reverse, sub = string.sub,
-				unpack = string.unpack, upper = string.upper,
-			},
-
-			table = {
-				concat = table.concat, insert = table.insert, pack = table.pack, remove = table.remove, sort = table.sort,
-				unpack = table.unpack,
-			},
-
-			utf8 = {
-				char = utf8.char, charpattern = utf8.charpattern, codepoint = utf8.codepoint, codes = utf8.codes,
-				len = utf8.len, nfdnormalize = utf8.nfdnormalize, nfcnormalize = utf8.nfcnormalize,
-			},
-
-			os = {
-				clock = os.clock, date = os.date, difftime = os.difftime, time = os.time,
-			},
-
-			delay = delay, elapsedTime = elapsedTime, spawn = spawn, tick = tick, time = time, typeof = typeof,
-			UserSettings = UserSettings, version = version, wait = wait, _VERSION = _VERSION,
-
-			task = {
-				defer = task.defer, delay = task.delay, spawn = task.spawn, wait = task.wait,
-			},
-
-			debug = {
-				traceback = debug.traceback, profilebegin = debug.profilebegin, profileend = debug.profileend,
-			},
-
-			game = game, workspace = workspace, Game = game, Workspace = workspace,
-
-			getmetatable = getmetatable, setmetatable = setmetatable
-		}
-		table.freeze(renv)
-		getgenv().getrenv = function()
-			return renv
-		end
-	end
-end
-function CheckEnv2(tbl)
-	local Env = CheckEnv()
-	local test1 = Env.CheckDecompile()
-	local test2 = Env.CheckGetGenv()
-	local test3 = Env.CheckGetRenv()
-	function DecompileTest()
-		if test1 then
-			tbl.decompile = true
-		else
-			CreateEnv("decompile")
-			tbl.decompile = false
-		end
-	end
-	function GetRenvTest()
-		if test3 then
-			tbl.getrenv = true
-		else
-			CreateEnv("getrenv")
-			tbl.getrenv = false
-		end
-	end
-
-	DecompileTest()
-	GetRenvTest()
-end
-
-local EnvTable = {
-	decompile = false,
-	getrenv = false,
-}
+local exit = Instance.new("TextButton")
 
 LoadingScreen.Name = "LoadingScreen"
 LoadingScreen.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -193,7 +44,7 @@ titleig.BorderSizePixel = 0
 titleig.Position = UDim2.new(0.263657957, 0, 0.100000001, 0)
 titleig.Size = UDim2.new(0, 200, 0, 23)
 titleig.Font = Enum.Font.SourceSans
-titleig.Text = "Normal Hub - Loading V"..vers
+titleig.Text = "Normal Hub - Loader V"..vers
 titleig.TextColor3 = Color3.fromRGB(255, 255, 255)
 titleig.TextScaled = true
 titleig.TextSize = 14.000
@@ -216,7 +67,7 @@ Status.TextWrapped = true
 
 StatusBar.Name = "StatusBar"
 StatusBar.Parent = hello
-StatusBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+StatusBar.BackgroundColor3 = Color3.fromRGB(208, 208, 208)
 StatusBar.BorderColor3 = Color3.fromRGB(0, 0, 255)
 StatusBar.BorderSizePixel = 0
 StatusBar.Position = UDim2.new(0.0237529688, 0, 0.680000007, 0)
@@ -229,51 +80,458 @@ FillBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 FillBar.BorderSizePixel = 0
 FillBar.Size = UDim2.new(0, 0, 0, 23)
 
+exit.Name = "exit"
+exit.Parent = hello
+exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+exit.BackgroundTransparency = 1.000
+exit.BorderColor3 = Color3.fromRGB(0, 0, 0)
+exit.BorderSizePixel = 0
+exit.Position = UDim2.new(0.956284523, 0, 0, 0)
+exit.Size = UDim2.new(0, 18, 0, 19)
+exit.Font = Enum.Font.SourceSans
+exit.Text = "X"
+exit.TextColor3 = Color3.fromRGB(255, 0, 0)
+exit.TextScaled = true
+exit.TextSize = 14.000
+exit.TextWrapped = true
+
+exit.MouseButton1Click:Connect(function()
+	Exitted = true
+	LoadingScreen:Destroy()
+end)
+
 wait(math.random(3, 6) / 10)
 
-Status.Text = "Checking & Adding Environment..."
-FillBar.Size = UDim2.new(0, 56, 0, 23)
-CheckEnv2(EnvTable)
-CreateEnv("CustomFunctions") -- custom naming env
+if not Exitted then
+	Status.Text = "Checking Environment..."
+	FillBar.Size = UDim2.new(0, 56, 0, 23)
+
+	function CheckEveryEnv()
+		local GetGenv = false
+		local IsFolder = false
+		local IsFile = false
+		local ReadFile = false
+		local WriteFile = false
+		local MakeFolder = false
+		local DelFile = false
+		if getgenv then
+			if typeof(getgenv) == "function" then
+				local globalenv = getgenv()
+				if typeof(globalenv) == "table" then
+					getgenv().TESTGLOBAL = true
+					if getgenv().TESTGLOBAL and TESTGLOBAL then
+						getgenv().TESTGLOBAL = nil
+						GetGenv = true
+					end
+				end
+			end
+		end
+
+		if isfolder then
+			if typeof(isfolder) == "function" then
+				if makefolder then
+					makefolder("TEST_FOLDER")
+				end
+				if isfolder("TEST_FOLDER") then
+					if not isfolder("TEST_FAKEFOLDER") then
+						IsFolder = true
+					end
+				end
+			end
+		end
+
+		if isfile then
+			if typeof(isfile) == "function" then
+				if writefile then
+					writefile("TEST.txt", " ")
+				end
+				if isfile("TEST.txt") then
+					if not isfile("FAKETEST.txt") then
+						if makefolder then
+							makefolder("TEST_FOLDER")
+						end
+						if not isfile("TEST_FOLDER") then
+							if delfolder then
+								delfolder("TEST_FOLDER")
+							end
+							if delfile then
+								delfile("TEST.txt")
+							end
+							IsFile = true
+						end
+					end
+				end
+			end
+		end
+
+		if readfile then
+			if typeof(readfile) == "function" then
+				if writefile then
+					writefile("TEST.txt", "test1")
+				end
+				if typeof(readfile("TEST.txt")) == "string" then
+					if readfile("TEST.txt") == "test1" then
+						if writefile then
+							writefile("TEST.txt", "test2")
+						end
+						if readfile("TEST.txt") == "test2" then
+							if delfile then
+								delfile("TEST.txt")
+							end
+							ReadFile = true
+						end
+					end
+				end
+			end
+		end
+
+		if writefile then
+			if typeof(writefile) == "function" then
+				writefile("TEST.txt", "test1")
+				if readfile("TEST.txt") == "test1" then
+					writefile("TEST.txt", "test2")
+					if readfile("TEST.txt") == "test2" then
+						if makefolder then
+							makefolder("TEST_FOLDER")
+						end
+						writefile("TEST_FOLDER//TEST.txt", " ")
+						if isfile("TEST_FOLDER//TEST.txt") then
+							WriteFile = true
+							if delfolder then
+								delfolder("TEST_FOLDER")
+							end
+						end
+					end
+				end
+			end
+		end
+
+		if makefolder then
+			if typeof(makefolder) == "function" then
+				makefolder("TEST")
+				if isfolder("TEST") then
+					makefolder("TEST//TEST2")
+					if isfolder("TEST//TEST2") then
+						MakeFolder = true
+						if delfolder then
+							delfolder("TEST")
+						end
+					end
+				end
+			end
+		end
+
+		if delfile then
+			if typeof(delfile) == "function" then
+				writefile("TEST.txt", "test1")
+				if isfile("TEST.txt") then
+					delfile("TEST.txt")
+					if not isfile("TEST.txt") then
+						makefolder("FOLDERWOW")
+						writefile("FOLDERWOW//SIGMA.txt", " ")
+						delfile("FOLDERWOW//SIGMA.txt")
+						if not isfile("FOLDERWOW//SIGMA.txt") then
+							if delfolder then
+								delfolder("FOLDERWOW")
+							end
+							DelFile = true
+						end
+					end
+				end
+			end
+		end
+
+		if not GetGenv then
+			Status.Text = "Your executor failed to pass the GetGenv() test. Which means it cannot run Normal Hub. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+			error("Your executor failed to pass the GetGenv() test. Which means it cannot run Normal Hub. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+		end
+
+		if not IsFolder then
+			Status.Text = "Your executor failed to pass the IsFolder() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+			error("Your executor failed to pass the IsFolder() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+		end
+
+		if not IsFile then
+			Status.Text = "Your executor failed to pass the IsFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+			error("Your executor failed to pass the IsFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+		end
+
+		if not ReadFile then
+			Status.Text = "Your executor failed to pass the ReadFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+			error("Your executor failed to pass the ReadFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+		end
+
+		if not WriteFile then
+			Status.Text = "Your executor failed to pass the WriteFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+			error("Your executor failed to pass the WriteFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+		end
+
+		if not MakeFolder then
+			Status.Text = "Your executor failed to pass the MakeFolder() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+			error("Your executor failed to pass the MakeFolder() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+		end
+
+		if not DelFile then
+			Status.Text = "Your executor failed to pass the DelFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+			error("Your executor failed to pass the DelFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+		end
+	end
+end
 
 wait(math.random(6, 9) / 10)
 
-Status.Text = "Checking for Updates..."
-FillBar.Size = UDim2.new(0, 118, 0, 23)
+if not Exitted then
+	CheckEveryEnv()
+	Status.Text = "Checking for Updates..."
+	FillBar.Size = UDim2.new(0, 118, 0, 23)
+end
 
 wait(math.random(2, 4) / 10)
 
-local versioncheck = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/version.lua"))()
-if vers ~= versioncheck then
-	RunningLatestVersion = true
-	Status.Text = "New update found! Running the latest version..."
-	FillBar.Size = UDim2.new(0, 160, 0, 23)
-	wait(math.random(3, 5) / 10)
-	LoadingScreen:Destroy()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
-end
+if not Exitted then
+	local versioncheck = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/version.lua"))()
+	if vers ~= versioncheck then
+		RunningLatestVersion = true
+		Status.Text = "New update found! Running the latest version..."
+		FillBar.Size = UDim2.new(0, 160, 0, 23)
+		wait(math.random(3, 5) / 10)
+		if not Exitted then
+			LoadingScreen:Destroy()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
+		end
+	end
 
-if not RunningLatestVersion then
-	Status.Text = "Checking Whitelist..."
-	FillBar.Size = UDim2.new(0, 204, 0, 23)
-	wait(math.random(4, 6) / 10)
-	local WhitelistTable = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/whitelist.lua"))()
-	for i,v in pairs(WhitelistTable) do
-		for _,thing in pairs(v) do
-			if game.Players.LocalPlayer.Name == thing then
-				game.Players.LocalPlayer:Kick("You have been blacklisted from Normal Hub!")
-			elseif game.Players.LocalPlayer.UserId == thing then
-				game.Players.LocalPlayer:Kick("You have been blacklisted from Normal Hub!")
+	if not RunningLatestVersion and not Exitted then
+		Status.Text = "Checking Whitelist..."
+		FillBar.Size = UDim2.new(0, 204, 0, 23)
+		wait(math.random(4, 6) / 10)
+		if not Exitted then
+			local WhitelistTable = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/whitelist.lua"))()
+			for i,v in pairs(WhitelistTable) do
+				for _,thing in pairs(v) do
+					if game.Players.LocalPlayer.Name == thing then
+						game.Players.LocalPlayer:Kick("You have been blacklisted from Normal Hub!")
+					elseif game.Players.LocalPlayer.UserId == thing then
+						game.Players.LocalPlayer:Kick("You have been blacklisted from Normal Hub!")
+					end
+				end
+			end
+			Status.Text = "Checking for Authentication..."
+			FillBar.Size = UDim2.new(0, 298, 0, 23)
+		end
+
+		wait(math.random(8, 12) / 10)
+
+		function CheckAuth()
+			if isfolder("Normal Hub") then
+				if isfile("Normal Hub//key.txt") then
+					local key = readfile("Normal Hub//key.txt")
+					if key == "trial" then
+						return true
+					else
+						return false
+					end
+				else
+					writefile("Normal Hub//key.txt", " ")
+					return false
+				end
+			else
+				makefolder("Normal Hub")
+				writefile("Normal Hub//key.txt", " ")
+				return false
+			end
+		end
+
+		if not CheckAuth() and not Exitted then
+			RunningKeySystem = true
+			Status.Text = "Key not found! Launching the key system..."
+			FillBar.Size = UDim2.new(0, 345, 0, 23)
+			wait(math.random(7, 10) / 10)
+			if not Exitted then
+				LoadingScreen:Destroy()
+				local KeySystem = Instance.new("ScreenGui")
+				local Frame = Instance.new("Frame")
+				local titlewow = Instance.new("TextLabel")
+				local keyinput = Instance.new("TextBox")
+				local checkkey = Instance.new("TextButton")
+				local UICorner = Instance.new("UICorner")
+				local getkey = Instance.new("TextButton")
+				local UICorner_2 = Instance.new("UICorner")
+				local discordserver = Instance.new("TextButton")
+				local UICorner_3 = Instance.new("UICorner")
+				local exit = Instance.new("TextButton")
+
+				KeySystem.Name = "KeySystem"
+				KeySystem.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+				KeySystem.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+				KeySystem.ResetOnSpawn = false
+
+				Frame.Parent = KeySystem
+				Frame.BackgroundColor3 = Color3.fromRGB(57, 57, 57)
+				Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				Frame.BorderSizePixel = 0
+				Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+				Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+				Frame.Size = UDim2.new(0, 287, 0, 128)
+				Frame.Active = true
+				Frame.Draggable = true
+
+				titlewow.Name = "title wow"
+				titlewow.Parent = Frame
+				titlewow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				titlewow.BackgroundTransparency = 1.000
+				titlewow.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				titlewow.BorderSizePixel = 0
+				titlewow.Position = UDim2.new(0.174216032, 0, 0, 0)
+				titlewow.Size = UDim2.new(0, 187, 0, 32)
+				titlewow.Font = Enum.Font.SourceSans
+				titlewow.Text = "Normal Hub - Key System"
+				titlewow.TextColor3 = Color3.fromRGB(255, 255, 255)
+				titlewow.TextScaled = true
+				titlewow.TextSize = 14.000
+				titlewow.TextWrapped = true
+
+				keyinput.Name = "keyinput"
+				keyinput.Parent = Frame
+				keyinput.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+				keyinput.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				keyinput.BorderSizePixel = 0
+				keyinput.Position = UDim2.new(0.0452961661, 0, 0.3046875, 0)
+				keyinput.Size = UDim2.new(0, 262, 0, 35)
+				keyinput.ClearTextOnFocus = false
+				keyinput.Font = Enum.Font.SourceSans
+				keyinput.PlaceholderText = "Key Here..."
+				keyinput.Text = ""
+				keyinput.TextColor3 = Color3.fromRGB(255, 255, 255)
+				keyinput.TextScaled = true
+				keyinput.TextSize = 14.000
+				keyinput.TextWrapped = true
+
+				checkkey.Name = "checkkey"
+				checkkey.Parent = Frame
+				checkkey.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+				checkkey.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				checkkey.BorderSizePixel = 0
+				checkkey.Position = UDim2.new(0.0452961661, 0, 0.640625, 0)
+				checkkey.Size = UDim2.new(0, 75, 0, 40)
+				checkkey.Font = Enum.Font.SourceSans
+				checkkey.Text = "Check Key"
+				checkkey.TextColor3 = Color3.fromRGB(0, 0, 0)
+				checkkey.TextScaled = true
+				checkkey.TextSize = 14.000
+				checkkey.TextWrapped = true
+
+				UICorner.Parent = checkkey
+
+				getkey.Name = "getkey"
+				getkey.Parent = Frame
+				getkey.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+				getkey.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				getkey.BorderSizePixel = 0
+				getkey.Position = UDim2.new(0.696864128, 0, 0.640625, 0)
+				getkey.Size = UDim2.new(0, 75, 0, 40)
+				getkey.Font = Enum.Font.SourceSans
+				getkey.Text = "Get Key"
+				getkey.TextColor3 = Color3.fromRGB(0, 0, 0)
+				getkey.TextScaled = true
+				getkey.TextSize = 14.000
+				getkey.TextWrapped = true
+
+				UICorner_2.Parent = getkey
+
+				discordserver.Name = "discordserver"
+				discordserver.Parent = Frame
+				discordserver.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+				discordserver.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				discordserver.BorderSizePixel = 0
+				discordserver.Position = UDim2.new(0.369337976, 0, 0.640625, 0)
+				discordserver.Size = UDim2.new(0, 75, 0, 40)
+				discordserver.Font = Enum.Font.SourceSans
+				discordserver.Text = "Discord"
+				discordserver.TextColor3 = Color3.fromRGB(0, 0, 0)
+				discordserver.TextScaled = true
+				discordserver.TextSize = 14.000
+				discordserver.TextWrapped = true
+
+				UICorner_3.Parent = discordserver
+
+				exit.Name = "exit"
+				exit.Parent = Frame
+				exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				exit.BackgroundTransparency = 1.000
+				exit.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				exit.BorderSizePixel = 0
+				exit.Position = UDim2.new(0.937282205, 0, 0, 0)
+				exit.Size = UDim2.new(0, 18, 0, 19)
+				exit.Font = Enum.Font.SourceSans
+				exit.Text = "X"
+				exit.TextColor3 = Color3.fromRGB(255, 0, 0)
+				exit.TextScaled = true
+				exit.TextSize = 14.000
+				exit.TextWrapped = true
+
+				function notify(msg, t)
+					loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/LinoriaLib/main/Library.lua"))():Notify(msg, t or 5)
+
+					task.spawn(function()
+						local sound = Instance.new("Sound", game.ReplicatedStorage)
+						sound.SoundId = "rbxassetid://4590657391"
+						sound.Volume = 2
+						sound:Play()
+
+						sound.Ended:Wait()
+						sound:Destroy()
+					end)
+				end
+
+				checkkey.MouseButton1Click:Connect(function()
+					if keyinput.Text == "trial" then
+						notify("Correct Key! Launching Normal Hub - Loader.", 3)
+						if not isfolder("Normal Hub") then
+							makefolder("Normal Hub")
+							writefile("Normal Hub//key.txt", keyinput.Text)
+							KeySystem:Destroy()
+						else
+							if not isfile("Normal Hub//key.txt") then
+								writefile("Normal Hub//key.txt", keyinput.Text)
+								KeySystem:Destroy()
+							else
+								delfile("Normal Hub//key.txt")
+								writefile("Normal Hub//key.txt", keyinput.Text)
+								KeySystem:Destroy()
+							end
+						end
+						wait(math.random(7, 13) / 10)
+						loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
+					else
+						notify("Incorrect Key!", 3)
+					end
+				end)
+
+				getkey.MouseButton1Click:Connect(function()
+					notify("Currently there is not an official key system. The key is 'trial'.", 3)
+				end)
+
+				discordserver.MouseButton1Click:Connect(function()
+					notify("Coming Soon!", 3)
+				end)
+
+				exit.MouseButton1Click:Connect(function()
+					KeySystem:Destroy()
+				end)
+			end
+		end
+
+		if not RunningKeySystem and not Exitted then
+			wait(math.random(8, 12) / 10)
+			if not Exitted then
+				Status.Text = "Finished!"
+				FillBar.Size = UDim2.new(0, 401, 0, 23)
+			end
+			wait(math.random(9, 13) / 10)
+			if not Exitted then
+				LoadingScreen:Destroy()
 			end
 		end
 	end
-	Status.Text = "Checking for Authentication..."
-	FillBar.Size = UDim2.new(0, 298, 0, 23)
-	wait(math.random(8, 12) / 10)
-	-- Auth checking --
-	wait(math.random(8, 12) / 10)
-	Status.Text = "Finished!"
-	FillBar.Size = UDim2.new(0, 401, 0, 23)
-	wait(math.random(9, 13) / 10)
-	LoadingScreen:Destroy()
 end
