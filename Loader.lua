@@ -1,4 +1,4 @@
-local vers = "0.3.1"
+local vers = "0.3.2"
 local RunningLatestVersion = false
 local RunningKeySystem = false
 local Exitted = false
@@ -13,7 +13,7 @@ local FillBar = Instance.new("Frame")
 local exit = Instance.new("TextButton")
 
 LoadingScreen.Name = "LoadingScreen"
-LoadingScreen.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+LoadingScreen.Parent = game:WaitForChild("CoreGui")
 LoadingScreen.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 LoadingScreen.ResetOnSpawn = false
 
@@ -25,8 +25,8 @@ hello.BorderSizePixel = 0
 hello.AnchorPoint = Vector2.new(0.5, 0.5)
 hello.Position = UDim2.new(0.5, 0, 0.5, 0)
 hello.Size = UDim2.new(0, 421, 0, 100)
-hello.Active = true
-hello.Draggable = true
+
+local dragToggle = nil local dragStart = nil local startPos = nil local function updateInput(input)local delta = input.Position - dragStart local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)game:GetService('TweenService'):Create(hello, TweenInfo.new(0.15), {Position = position}):Play()end hello.InputBegan:Connect(function(input)if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then dragToggle = true dragStart = input.Position startPos = hello.Position input.Changed:Connect(function()if input.UserInputState == Enum.UserInputState.End then dragToggle = false end end)end end)game:GetService('UserInputService').InputChanged:Connect(function(input)if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then if dragToggle then updateInput(input)end end end)
 
 UpperFrame.Name = "UpperFrame"
 UpperFrame.Parent = hello
@@ -131,10 +131,70 @@ if not Exitted then
 			if typeof(isfolder) == "function" then
 				if makefolder then
 					makefolder("TEST_FOLDER")
+				else
+					Status.Text = "Can't verify isfolder() due to makefolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+					error("Can't verify isfolder() due to makefolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
 				end
 				if isfolder("TEST_FOLDER") then
 					if not isfolder("TEST_FAKEFOLDER") then
 						IsFolder = true
+					end
+				end
+			end
+		end
+		
+		if readfile then
+			if typeof(readfile) == "function" then
+				if writefile then
+					writefile("TEST.txt", "test1")
+				else
+					Status.Text = "Can't verify readfile() due to writefile() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+					error("Can't verify readfile() due to writefile() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+				end
+				if typeof(readfile("TEST.txt")) == "string" then
+					if readfile("TEST.txt") == "test1" then
+						if writefile then
+							writefile("TEST.txt", "test2")
+						else
+							Status.Text = "Can't verify readfile() due to writefile() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+							error("Can't verify readfile() due to writefile() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+						end
+						if readfile("TEST.txt") == "test2" then
+							if delfile then
+								delfile("TEST.txt")
+							else
+								Status.Text = "Can't verify readfile() due to delfile() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+								error("Can't verify readfile() due to delfile() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+							end
+							ReadFile = true
+						end
+					end
+				end
+			end
+		end
+		
+		if writefile then
+			if typeof(writefile) == "function" then
+				writefile("TEST.txt", "test1")
+				if readfile("TEST.txt") == "test1" then
+					writefile("TEST.txt", "test2")
+					if readfile("TEST.txt") == "test2" then
+						if makefolder then
+							makefolder("TEST_FOLDER")
+						else
+							Status.Text = "Can't verify writefile() due to makefolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+							error("Can't verify writefile() due to makefolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+						end
+						writefile("TEST_FOLDER//TEST.txt", " ")
+						if isfile("TEST_FOLDER//TEST.txt") then
+							WriteFile = true
+							if delfolder then
+								delfolder("TEST_FOLDER")
+							else
+								Status.Text = "Can't verify writefile() due to delfolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+								error("Can't verify writefile() due to delfolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+							end
+						end
 					end
 				end
 			end
@@ -144,62 +204,32 @@ if not Exitted then
 			if typeof(isfile) == "function" then
 				if writefile then
 					writefile("TEST.txt", " ")
+				else
+					Status.Text = "Can't verify isfile() due to writefile() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+					error("Can't verify isfile() due to writefile() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
 				end
 				if isfile("TEST.txt") then
 					if not isfile("FAKETEST.txt") then
 						if makefolder then
 							makefolder("TEST_FOLDER")
+						else
+							Status.Text = "Can't verify isfolder() due to makefolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+							error("Can't verify isfolder() due to makefolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
 						end
 						if not isfile("TEST_FOLDER") then
 							if delfolder then
 								delfolder("TEST_FOLDER")
+							else
+								Status.Text = "Can't verify isfile() due to delfolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+								error("Can't verify isfile() due to delfolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
 							end
 							if delfile then
 								delfile("TEST.txt")
+							else
+								Status.Text = "Can't verify isfile() due to delfile() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+								error("Can't verify isfile() due to delfile() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
 							end
 							IsFile = true
-						end
-					end
-				end
-			end
-		end
-
-		if readfile then
-			if typeof(readfile) == "function" then
-				if writefile then
-					writefile("TEST.txt", "test1")
-				end
-				if typeof(readfile("TEST.txt")) == "string" then
-					if readfile("TEST.txt") == "test1" then
-						if writefile then
-							writefile("TEST.txt", "test2")
-						end
-						if readfile("TEST.txt") == "test2" then
-							if delfile then
-								delfile("TEST.txt")
-							end
-							ReadFile = true
-						end
-					end
-				end
-			end
-		end
-
-		if writefile then
-			if typeof(writefile) == "function" then
-				writefile("TEST.txt", "test1")
-				if readfile("TEST.txt") == "test1" then
-					writefile("TEST.txt", "test2")
-					if readfile("TEST.txt") == "test2" then
-						if makefolder then
-							makefolder("TEST_FOLDER")
-						end
-						writefile("TEST_FOLDER//TEST.txt", " ")
-						if isfile("TEST_FOLDER//TEST.txt") then
-							WriteFile = true
-							if delfolder then
-								delfolder("TEST_FOLDER")
-							end
 						end
 					end
 				end
@@ -215,6 +245,9 @@ if not Exitted then
 						MakeFolder = true
 						if delfolder then
 							delfolder("TEST")
+						else
+							Status.Text = "Can't verify makefolder() due to delfolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+							error("Can't verify makefolder() due to delfolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
 						end
 					end
 				end
@@ -233,6 +266,9 @@ if not Exitted then
 						if not isfile("FOLDERWOW//SIGMA.txt") then
 							if delfolder then
 								delfolder("FOLDERWOW")
+							else
+								Status.Text = "Can't verify delfile() due to delfolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
+								error("Can't verify delfile() due to delfolder() not working. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
 							end
 							DelFile = true
 						end
@@ -274,6 +310,22 @@ if not Exitted then
 		if not DelFile then
 			Status.Text = "Your executor failed to pass the DelFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
 			error("Your executor failed to pass the DelFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
+		end
+		
+		if isfolder("TEST_FOLDER") and delfolder then
+			delfolder("TEST_FOLDER")
+		end
+
+		if isfolder("FOLDERWOW") and delfolder then
+			delfolder("FOLDERWOW")
+		end
+
+		if isfolder("TEST") and delfolder then
+			delfolder("TEST")
+		end
+		
+		if isfile("TEST.txt") then
+			delfile("TEST.txt")
 		end
 	end
 end
@@ -362,7 +414,7 @@ if not Exitted then
 				local exit = Instance.new("TextButton")
 
 				KeySystem.Name = "KeySystem"
-				KeySystem.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+				KeySystem.Parent = game:WaitForChild("CoreGui")
 				KeySystem.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 				KeySystem.ResetOnSpawn = false
 
@@ -373,8 +425,8 @@ if not Exitted then
 				Frame.AnchorPoint = Vector2.new(0.5, 0.5)
 				Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
 				Frame.Size = UDim2.new(0, 287, 0, 128)
-				Frame.Active = true
-				Frame.Draggable = true
+				
+				local dragToggle = nil local dragStart = nil local startPos = nil local function updateInput(input)local delta = input.Position - dragStart local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)game:GetService('TweenService'):Create(Frame, TweenInfo.new(0.15), {Position = position}):Play()end Frame.InputBegan:Connect(function(input)if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then dragToggle = true dragStart = input.Position startPos = Frame.Position input.Changed:Connect(function()if input.UserInputState == Enum.UserInputState.End then dragToggle = false end end)end end)game:GetService('UserInputService').InputChanged:Connect(function(input)if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then if dragToggle then updateInput(input)end end end)
 
 				titlewow.Name = "title wow"
 				titlewow.Parent = Frame
