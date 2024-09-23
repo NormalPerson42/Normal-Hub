@@ -466,6 +466,10 @@ if not Exitted then
 						return "Lite"
 					elseif key == "NoKeyTillNextLaunch" then
 						return "NoKey"
+					elseif key == "trial" then
+						return "Freemium"
+					elseif key == "trial2" then
+						return "Premium"
 					else
 						return "NoKey"
 					end
