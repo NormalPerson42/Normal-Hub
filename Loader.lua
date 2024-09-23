@@ -9,7 +9,7 @@ local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
 local TimeLeft = Instance.new("Frame")
 
 notification.Name = "notification"
-notification.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+notification.Parent = game:GetService("CoreGui")
 notification.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 notification.IgnoreGuiInset = true
 
@@ -462,9 +462,7 @@ if not Exitted then
 			if isfolder("Normal Hub") then
 				if isfile("Normal Hub//key.txt") then
 					local key = readfile("Normal Hub//key.txt")
-					if key == "trial" then
-						return "Freemium"
-					elseif key == "NoKeyInputted" then
+					if key == "NoKeyInputted" then
 						return "Lite"
 					elseif key == "NoKeyTillNextLaunch" then
 						return "NoKey"
@@ -481,286 +479,316 @@ if not Exitted then
 				return false
 			end
 		end
-		
-		if isfolder("Normal Hub") then
-			if isfile("Normal Hub//key.txt") then
-				local key = readfile("Normal Hub//key.txt")
-				if key == "NoKeyTillNextLaunch" then
-					writefile("Normal Hub//key.txt", "NoKey")
-				end
+	end
+
+	if isfolder("Normal Hub") then
+		if isfile("Normal Hub//key.txt") then
+			local key = readfile("Normal Hub//key.txt")
+			if key == "NoKeyTillNextLaunch" then
+				writefile("Normal Hub//key.txt", "NoKey")
 			end
 		end
+	end
 
-		if CheckAuth() == "NoKey" and not Exitted then
-			RunningKeySystem = true
-			Status.Text = "Key not found! Launching the key system..."
-			FillBar.Size = UDim2.new(0, 345, 0, 23)
-			wait(math.random(1, 3) / 15)
-			if not Exitted then
-				LoadingScreen:Destroy()
-				local KeySystem = Instance.new("ScreenGui")
-				local Frame = Instance.new("Frame")
-				local titlewow = Instance.new("TextLabel")
-				local keyinput = Instance.new("TextBox")
-				local checkkey = Instance.new("TextButton")
-				local UICorner = Instance.new("UICorner")
-				local getkey = Instance.new("TextButton")
-				local UICorner_2 = Instance.new("UICorner")
-				local discordserver = Instance.new("TextButton")
-				local UICorner_3 = Instance.new("UICorner")
-				local exit = Instance.new("TextButton")
-				local ContinueNoKey = Instance.new("TextButton")
+	if CheckAuth() == "NoKey" and not Exitted then
+		RunningKeySystem = true
+		Status.Text = "Key not found! Launching the key system..."
+		FillBar.Size = UDim2.new(0, 345, 0, 23)
+		wait(math.random(1, 3) / 15)
+		if not Exitted then
+			LoadingScreen:Destroy()
+			local KeySystem = Instance.new("ScreenGui")
+			local Frame = Instance.new("Frame")
+			local titlewow = Instance.new("TextLabel")
+			local keyinput = Instance.new("TextBox")
+			local checkkey = Instance.new("TextButton")
+			local UICorner = Instance.new("UICorner")
+			local getkey = Instance.new("TextButton")
+			local UICorner_2 = Instance.new("UICorner")
+			local discordserver = Instance.new("TextButton")
+			local UICorner_3 = Instance.new("UICorner")
+			local exit = Instance.new("TextButton")
+			local ContinueNoKey = Instance.new("TextButton")
 
-				KeySystem.Name = "KeySystem"
-				KeySystem.Parent = game:WaitForChild("CoreGui")
-				KeySystem.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-				KeySystem.ResetOnSpawn = false
+			KeySystem.Name = "KeySystem"
+			KeySystem.Parent = game:WaitForChild("CoreGui")
+			KeySystem.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+			KeySystem.ResetOnSpawn = false
 
-				Frame.Parent = KeySystem
-				Frame.BackgroundColor3 = Color3.fromRGB(57, 57, 57)
-				Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-				Frame.BorderSizePixel = 0
-				Frame.AnchorPoint = Vector2.new(0.5, 0.5)
-				Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
-				Frame.Size = UDim2.new(0, 287, 0, 128)
+			Frame.Parent = KeySystem
+			Frame.BackgroundColor3 = Color3.fromRGB(57, 57, 57)
+			Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Frame.BorderSizePixel = 0
+			Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+			Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+			Frame.Size = UDim2.new(0, 287, 0, 128)
 
-				local dragToggle = nil local dragStart = nil local startPos = nil local function updateInput(input)local delta = input.Position - dragStart local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)game:GetService('TweenService'):Create(Frame, TweenInfo.new(0.15), {Position = position}):Play()end Frame.InputBegan:Connect(function(input)if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then dragToggle = true dragStart = input.Position startPos = Frame.Position input.Changed:Connect(function()if input.UserInputState == Enum.UserInputState.End then dragToggle = false end end)end end)game:GetService('UserInputService').InputChanged:Connect(function(input)if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then if dragToggle then updateInput(input)end end end)
+			local dragToggle = nil local dragStart = nil local startPos = nil local function updateInput(input)local delta = input.Position - dragStart local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)game:GetService('TweenService'):Create(Frame, TweenInfo.new(0.15), {Position = position}):Play()end Frame.InputBegan:Connect(function(input)if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then dragToggle = true dragStart = input.Position startPos = Frame.Position input.Changed:Connect(function()if input.UserInputState == Enum.UserInputState.End then dragToggle = false end end)end end)game:GetService('UserInputService').InputChanged:Connect(function(input)if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then if dragToggle then updateInput(input)end end end)
 
-				titlewow.Name = "title wow"
-				titlewow.Parent = Frame
-				titlewow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				titlewow.BackgroundTransparency = 1.000
-				titlewow.BorderColor3 = Color3.fromRGB(0, 0, 0)
-				titlewow.BorderSizePixel = 0
-				titlewow.Position = UDim2.new(0.174216032, 0, 0, 0)
-				titlewow.Size = UDim2.new(0, 187, 0, 32)
-				titlewow.Font = Enum.Font.SourceSans
-				titlewow.Text = "Normal Hub - Key System"
-				titlewow.TextColor3 = Color3.fromRGB(255, 255, 255)
-				titlewow.TextScaled = true
-				titlewow.TextSize = 14.000
-				titlewow.TextWrapped = true
+			titlewow.Name = "title wow"
+			titlewow.Parent = Frame
+			titlewow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			titlewow.BackgroundTransparency = 1.000
+			titlewow.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			titlewow.BorderSizePixel = 0
+			titlewow.Position = UDim2.new(0.174216032, 0, 0, 0)
+			titlewow.Size = UDim2.new(0, 187, 0, 32)
+			titlewow.Font = Enum.Font.SourceSans
+			titlewow.Text = "Normal Hub - Key System"
+			titlewow.TextColor3 = Color3.fromRGB(255, 255, 255)
+			titlewow.TextScaled = true
+			titlewow.TextSize = 14.000
+			titlewow.TextWrapped = true
 
-				keyinput.Name = "keyinput"
-				keyinput.Parent = Frame
-				keyinput.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
-				keyinput.BorderColor3 = Color3.fromRGB(0, 0, 0)
-				keyinput.BorderSizePixel = 0
-				keyinput.Position = UDim2.new(0.0452961661, 0, 0.3046875, 0)
-				keyinput.Size = UDim2.new(0, 262, 0, 35)
-				keyinput.ClearTextOnFocus = false
-				keyinput.Font = Enum.Font.SourceSans
-				keyinput.PlaceholderText = "Key Here..."
-				keyinput.Text = ""
-				keyinput.TextColor3 = Color3.fromRGB(255, 255, 255)
-				keyinput.TextScaled = true
-				keyinput.TextSize = 14.000
-				keyinput.TextWrapped = true
+			keyinput.Name = "keyinput"
+			keyinput.Parent = Frame
+			keyinput.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+			keyinput.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			keyinput.BorderSizePixel = 0
+			keyinput.Position = UDim2.new(0.0452961661, 0, 0.3046875, 0)
+			keyinput.Size = UDim2.new(0, 262, 0, 35)
+			keyinput.ClearTextOnFocus = false
+			keyinput.Font = Enum.Font.SourceSans
+			keyinput.PlaceholderText = "Key Here..."
+			keyinput.Text = ""
+			keyinput.TextColor3 = Color3.fromRGB(255, 255, 255)
+			keyinput.TextScaled = true
+			keyinput.TextSize = 14.000
+			keyinput.TextWrapped = true
 
-				ContinueNoKey.Name = "ContinueNoKey"
-				ContinueNoKey.Parent = Frame
-				ContinueNoKey.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				ContinueNoKey.BackgroundTransparency = 1.000
-				ContinueNoKey.BorderColor3 = Color3.fromRGB(0, 0, 0)
-				ContinueNoKey.BorderSizePixel = 0
-				ContinueNoKey.Position = UDim2.new(0.243902445, 0, 0.8515625, 0)
-				ContinueNoKey.Size = UDim2.new(0, 147, 0, 19)
-				ContinueNoKey.Font = Enum.Font.SourceSans
-				ContinueNoKey.Text = "Continue with no key."
-				ContinueNoKey.TextColor3 = Color3.fromRGB(131, 131, 131)
-				ContinueNoKey.TextScaled = true
-				ContinueNoKey.TextSize = 14.000
-				ContinueNoKey.TextWrapped = true
+			ContinueNoKey.Name = "ContinueNoKey"
+			ContinueNoKey.Parent = Frame
+			ContinueNoKey.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ContinueNoKey.BackgroundTransparency = 1.000
+			ContinueNoKey.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			ContinueNoKey.BorderSizePixel = 0
+			ContinueNoKey.Position = UDim2.new(0.243902445, 0, 0.8515625, 0)
+			ContinueNoKey.Size = UDim2.new(0, 147, 0, 19)
+			ContinueNoKey.Font = Enum.Font.SourceSans
+			ContinueNoKey.Text = "Continue with no key."
+			ContinueNoKey.TextColor3 = Color3.fromRGB(131, 131, 131)
+			ContinueNoKey.TextScaled = true
+			ContinueNoKey.TextSize = 14.000
+			ContinueNoKey.TextWrapped = true
 
-				checkkey.Name = "checkkey"
-				checkkey.Parent = Frame
-				checkkey.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-				checkkey.BorderColor3 = Color3.fromRGB(0, 0, 0)
-				checkkey.BorderSizePixel = 0
-				checkkey.Position = UDim2.new(0.0452961661, 0, 0.640625, 0)
-				checkkey.Size = UDim2.new(0, 75, 0, 27)
-				checkkey.Font = Enum.Font.SourceSans
-				checkkey.Text = "Check Key"
-				checkkey.TextColor3 = Color3.fromRGB(0, 0, 0)
-				checkkey.TextScaled = true
-				checkkey.TextSize = 14.000
-				checkkey.TextWrapped = true
+			checkkey.Name = "checkkey"
+			checkkey.Parent = Frame
+			checkkey.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+			checkkey.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			checkkey.BorderSizePixel = 0
+			checkkey.Position = UDim2.new(0.0452961661, 0, 0.640625, 0)
+			checkkey.Size = UDim2.new(0, 75, 0, 27)
+			checkkey.Font = Enum.Font.SourceSans
+			checkkey.Text = "Check Key"
+			checkkey.TextColor3 = Color3.fromRGB(0, 0, 0)
+			checkkey.TextScaled = true
+			checkkey.TextSize = 14.000
+			checkkey.TextWrapped = true
 
-				UICorner.Parent = checkkey
+			UICorner.Parent = checkkey
 
-				discordserver.Name = "discordserver"
-				discordserver.Parent = Frame
-				discordserver.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
-				discordserver.BorderColor3 = Color3.fromRGB(0, 0, 0)
-				discordserver.BorderSizePixel = 0
-				discordserver.Position = UDim2.new(0.369337976, 0, 0.640625, 0)
-				discordserver.Size = UDim2.new(0, 75, 0, 27)
-				discordserver.Font = Enum.Font.SourceSans
-				discordserver.Text = "Discord"
-				discordserver.TextColor3 = Color3.fromRGB(0, 0, 0)
-				discordserver.TextScaled = true
-				discordserver.TextSize = 14.000
-				discordserver.TextWrapped = true
+			discordserver.Name = "discordserver"
+			discordserver.Parent = Frame
+			discordserver.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+			discordserver.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			discordserver.BorderSizePixel = 0
+			discordserver.Position = UDim2.new(0.369337976, 0, 0.640625, 0)
+			discordserver.Size = UDim2.new(0, 75, 0, 27)
+			discordserver.Font = Enum.Font.SourceSans
+			discordserver.Text = "Discord"
+			discordserver.TextColor3 = Color3.fromRGB(0, 0, 0)
+			discordserver.TextScaled = true
+			discordserver.TextSize = 14.000
+			discordserver.TextWrapped = true
 
-				UICorner_2.Parent = discordserver
+			UICorner_2.Parent = discordserver
 
-				getkey.Name = "getkey"
-				getkey.Parent = Frame
-				getkey.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-				getkey.BorderColor3 = Color3.fromRGB(0, 0, 0)
-				getkey.BorderSizePixel = 0
-				getkey.Position = UDim2.new(0.696864128, 0, 0.640625, 0)
-				getkey.Size = UDim2.new(0, 75, 0, 27)
-				getkey.Font = Enum.Font.SourceSans
-				getkey.Text = "Get Key"
-				getkey.TextColor3 = Color3.fromRGB(0, 0, 0)
-				getkey.TextScaled = true
-				getkey.TextSize = 14.000
-				getkey.TextWrapped = true
+			getkey.Name = "getkey"
+			getkey.Parent = Frame
+			getkey.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+			getkey.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			getkey.BorderSizePixel = 0
+			getkey.Position = UDim2.new(0.696864128, 0, 0.640625, 0)
+			getkey.Size = UDim2.new(0, 75, 0, 27)
+			getkey.Font = Enum.Font.SourceSans
+			getkey.Text = "Get Key"
+			getkey.TextColor3 = Color3.fromRGB(0, 0, 0)
+			getkey.TextScaled = true
+			getkey.TextSize = 14.000
+			getkey.TextWrapped = true
 
-				UICorner_3.Parent = getkey
+			UICorner_3.Parent = getkey
 
-				exit.Name = "exit"
-				exit.Parent = Frame
-				exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				exit.BackgroundTransparency = 1.000
-				exit.BorderColor3 = Color3.fromRGB(0, 0, 0)
-				exit.BorderSizePixel = 0
-				exit.Position = UDim2.new(0.937282205, 0, 0, 0)
-				exit.Size = UDim2.new(0, 18, 0, 19)
-				exit.Font = Enum.Font.SourceSans
-				exit.Text = "X"
-				exit.TextColor3 = Color3.fromRGB(255, 0, 0)
-				exit.TextScaled = true
-				exit.TextSize = 14.000
-				exit.TextWrapped = true
+			exit.Name = "exit"
+			exit.Parent = Frame
+			exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			exit.BackgroundTransparency = 1.000
+			exit.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			exit.BorderSizePixel = 0
+			exit.Position = UDim2.new(0.937282205, 0, 0, 0)
+			exit.Size = UDim2.new(0, 18, 0, 19)
+			exit.Font = Enum.Font.SourceSans
+			exit.Text = "X"
+			exit.TextColor3 = Color3.fromRGB(255, 0, 0)
+			exit.TextScaled = true
+			exit.TextSize = 14.000
+			exit.TextWrapped = true
 
-				function notify(title, desc, duration)
-					local sound = Instance.new("Sound", game.ReplicatedStorage)
-					sound.SoundId = "rbxassetid://4590657391"
-					sound.Volume = 2
-					sound:Play()
+			function notify(title, desc, duration)
+				local sound = Instance.new("Sound", game.ReplicatedStorage)
+				sound.SoundId = "rbxassetid://4590657391"
+				sound.Volume = 2
+				sound:Play()
 
-					local notificationframe = placeholderframe_2:Clone()
-					notificationframe.Parent = placeholderframe_2.Parent
-					notificationframe.Title.Text = title
-					notificationframe.Desc.Text = desc
+				local notificationframe = placeholderframe_2:Clone()
+				notificationframe.Parent = placeholderframe_2.Parent
+				notificationframe.Title.Text = title
+				notificationframe.Desc.Text = desc
 
-					notificationframe:TweenSize(
-						UDim2.new(0.265, 0, 0.083, 0),
-						Enum.EasingDirection.In,
-						Enum.EasingStyle.Linear,
-						0.25,
-						false
-					)
-					wait(0.25)
-					sound:Destroy()
-					notificationframe.TimeLeft:TweenSize(
-						UDim2.new(0, 0, -0.0700000003, 0),
-						Enum.EasingDirection.In,
-						Enum.EasingStyle.Linear,
-						duration,
-						false
-					)
-					wait(duration)
-					notificationframe:TweenSize(
-						UDim2.new(0, 0, 0.083, 0),
-						Enum.EasingDirection.In,
-						Enum.EasingStyle.Linear,
-						0.25,
-						false
-					)
-					wait(0.25)
-					notificationframe:Destroy()
-				end
+				notificationframe:TweenSize(
+					UDim2.new(0.265, 0, 0.083, 0),
+					Enum.EasingDirection.In,
+					Enum.EasingStyle.Linear,
+					0.25,
+					false
+				)
+				wait(0.25)
+				sound:Destroy()
+				notificationframe.TimeLeft:TweenSize(
+					UDim2.new(0, 0, -0.0700000003, 0),
+					Enum.EasingDirection.In,
+					Enum.EasingStyle.Linear,
+					duration,
+					false
+				)
+				wait(duration)
+				notificationframe:TweenSize(
+					UDim2.new(0, 0, 0.083, 0),
+					Enum.EasingDirection.In,
+					Enum.EasingStyle.Linear,
+					0.25,
+					false
+				)
+				wait(0.25)
+				notificationframe:Destroy()
+			end
 
-				checkkey.MouseButton1Click:Connect(function()
-					if keyinput.Text == "trial" then
-						if not isfolder("Normal Hub") then
-							makefolder("Normal Hub")
+			checkkey.MouseButton1Click:Connect(function()
+				if keyinput.Text == "trial" then
+					if not isfolder("Normal Hub") then
+						makefolder("Normal Hub")
+						writefile("Normal Hub//key.txt", keyinput.Text)
+						KeySystem:Destroy()
+					else
+						if not isfile("Normal Hub//key.txt") then
 							writefile("Normal Hub//key.txt", keyinput.Text)
 							KeySystem:Destroy()
 						else
-							if not isfile("Normal Hub//key.txt") then
-								writefile("Normal Hub//key.txt", keyinput.Text)
-								KeySystem:Destroy()
-							else
-								delfile("Normal Hub//key.txt")
-								writefile("Normal Hub//key.txt", keyinput.Text)
-								KeySystem:Destroy()
-							end
+							delfile("Normal Hub//key.txt")
+							writefile("Normal Hub//key.txt", keyinput.Text)
+							KeySystem:Destroy()
 						end
-						spawn(function()
-							notify("Correct Key!", "Launching Normal Hub - Loader.", 3)
-						end)
-						wait(math.random(4, 7) / 15)
-						loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
-					else
-						spawn(function()
-							notify("Incorrect Key!", "Please Check or Enter your key.", 3)
-						end)
 					end
-				end)
-
-				getkey.MouseButton1Click:Connect(function()
-					setclipboard("trial")
 					spawn(function()
-						notify("At the moment don't have an official key system.", "The Key has been copied to your clipboard.", 3)--notify("Set to clipboard!", "The key link has been copied to your clipboard.", 3)
+						notify("Correct Key!", "Launching Normal Hub - Loader.", 3)
 					end)
-				end)
-
-				discordserver.MouseButton1Click:Connect(function()
-					setclipboard("https://discord.gg/qhZXXB8jRb")
-					spawn(function()
-						notify("Set to clipboard!", "The Discord link has been copied to your clipboard.", 3)
-					end)
-				end)
-
-				exit.MouseButton1Click:Connect(function()
-					KeySystem:Destroy()
-				end)
-				
-				ContinueNoKey.MouseButton1Click:Connect(function()
-					KeySystem:Destroy()
-					spawn(function()
-						notify("[WARNING] You will have less features than usual,", "If you want more features then you have to get the key.", 3)
-					end)
-					if isfolder("Normal Hub") then
-						if isfile("Normal Hub//key.txt") then
-							writefile("Normal Hub//key.txt", "NoKeyInputted")
-						else
-							writefile("Normal Hub//key.txt", "NoKeyInputted")
-						end
-					else
-						makefolder("Normal Hub")
-						writefile("Normal Hub//key.txt", "NoKeyInputted")
-					end
 					wait(math.random(4, 7) / 15)
 					loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
-				end)
-			end
-		elseif CheckAuth() == "Lite" then
-			if isfolder("Normal Hub") then
-				if isfile("Normal Hub//key.txt") then
-					writefile("Normal Hub//key.txt", "NoKeyTillNextLaunch")
+				elseif keyinput.Text == "trial2" then
+					if not isfolder("Normal Hub") then
+						makefolder("Normal Hub")
+						writefile("Normal Hub//key.txt", keyinput.Text)
+						KeySystem:Destroy()
+					else
+						if not isfile("Normal Hub//key.txt") then
+							writefile("Normal Hub//key.txt", keyinput.Text)
+							KeySystem:Destroy()
+						else
+							delfile("Normal Hub//key.txt")
+							writefile("Normal Hub//key.txt", keyinput.Text)
+							KeySystem:Destroy()
+						end
+					end
+					spawn(function()
+						notify("Correct Key!", "Launching Normal Hub - Loader.", 3)
+					end)
+					wait(math.random(4, 7) / 15)
+					loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
 				else
-					writefile("Normal Hub//key.txt", "NoKeyTillNextLaunch")
+					spawn(function()
+						notify("Incorrect Key!", "Please Check or Enter your key.", 3)
+					end)
 				end
+			end)
+
+			getkey.MouseButton1Click:Connect(function()
+				setclipboard("trial and trial2")
+				spawn(function()
+					notify("At the moment don't have an official key system.", "The Key has been copied to your clipboard.", 3)--notify("Set to clipboard!", "The key link has been copied to your clipboard.", 3)
+				end)
+			end)
+
+			discordserver.MouseButton1Click:Connect(function()
+				setclipboard("https://discord.gg/qhZXXB8jRb")
+				spawn(function()
+					notify("Set to clipboard!", "The Discord link has been copied to your clipboard.", 3)
+				end)
+			end)
+
+			exit.MouseButton1Click:Connect(function()
+				KeySystem:Destroy()
+			end)
+
+			ContinueNoKey.MouseButton1Click:Connect(function()
+				KeySystem:Destroy()
+				spawn(function()
+					notify("[WARNING] You will have less features than usual,", "If you want more features then you have to get the key.", 3)
+				end)
+				if isfolder("Normal Hub") then
+					if isfile("Normal Hub//key.txt") then
+						writefile("Normal Hub//key.txt", "NoKeyInputted")
+					else
+						writefile("Normal Hub//key.txt", "NoKeyInputted")
+					end
+				else
+					makefolder("Normal Hub")
+					writefile("Normal Hub//key.txt", "NoKeyInputted")
+				end
+				wait(math.random(4, 7) / 15)
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
+			end)
+		end
+	elseif CheckAuth() == "Lite" then
+		if isfolder("Normal Hub") then
+			if isfile("Normal Hub//key.txt") then
+				writefile("Normal Hub//key.txt", "NoKeyTillNextLaunch")
 			else
-				makefolder("Normal Hub")
 				writefile("Normal Hub//key.txt", "NoKeyTillNextLaunch")
 			end
+		else
+			makefolder("Normal Hub")
+			writefile("Normal Hub//key.txt", "NoKeyTillNextLaunch")
 		end
+	end
 
-		if not RunningKeySystem and not Exitted then
-			wait(math.random(1, 3) / 15)
-			if not Exitted then
-				Status.Text = "Finished!"
-				FillBar.Size = UDim2.new(0, 401, 0, 23)
-			end
-			wait(math.random(9, 11) / 10)
-			if not Exitted then
-				LoadingScreen:Destroy()
+	if not RunningKeySystem and not Exitted then
+		wait(math.random(1, 3) / 15)
+		if not Exitted then
+			Status.Text = "Finished!"
+			FillBar.Size = UDim2.new(0, 401, 0, 23)
+		end
+		wait(math.random(9, 11) / 10)
+		if not Exitted then
+			LoadingScreen:Destroy()
+			local key = readfile("Normal Hub//key.txt")
+			if key == "trial" then
+				notify("Test", "Freemium", 3)
+			elseif key == "trial2" then
+				notify("Test", "Premium", 3)
+			elseif key == "NoKeyTillNextLaunch" then
+				notify("Test", "Lite (no key)", 3)
+			else
+				notify("Test", "No key at all", 3)
 			end
 		end
 	end
