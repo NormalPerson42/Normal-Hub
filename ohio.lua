@@ -7,7 +7,7 @@ end
 local humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
 humanoid.Died:Connect(function()
     game:GetService("ReplicatedStorage").RemotesFolder.PlayAgain:FireServer()
-	queue_on_teleport("loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/ohio.lua"))()")
+	queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/ohio.lua'))()")
 end)
 
 
