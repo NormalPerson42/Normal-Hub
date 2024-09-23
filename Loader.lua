@@ -466,6 +466,8 @@ if not Exitted then
 						return "Freemium"
 					elseif key == "NoKeyInputted" then
 						return "Lite"
+					elseif key == "NoKeyTillNextLaunch" then
+						return "NoKey"
 					else
 						return "NoKey"
 					end
