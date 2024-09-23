@@ -475,12 +475,12 @@ if not Exitted then
 					end
 				else
 					writefile("Normal Hub//key.txt", " ")
-					return false
+					return "NoKey"
 				end
 			else
 				makefolder("Normal Hub")
 				writefile("Normal Hub//key.txt", " ")
-				return false
+				return "NoKey"
 			end
 		end
 	end
