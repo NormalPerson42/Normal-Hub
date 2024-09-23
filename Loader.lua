@@ -479,6 +479,15 @@ if not Exitted then
 				return false
 			end
 		end
+		
+		if isfolder("Normal Hub") then
+			if isfile("Normal Hub//key.txt") then
+				local key = readfile("Normal Hub//key.txt")
+				if key == "NoKeyTillNextLaunch" then
+					writefile("Normal Hub//key.txt", "NoKey")
+				end
+			end
+		end
 
 		if CheckAuth() == "NoKey" and not Exitted then
 			RunningKeySystem = true
@@ -710,6 +719,7 @@ if not Exitted then
 				end)
 				
 				ContinueNoKey.MouseButton1Click:Connect(function()
+					KeySystem:Destroy()
 					spawn(function()
 						notify("[WARNING] You will have less features than usual,", "If you want more features then you have to get the key.", 3)
 					end)
@@ -730,13 +740,13 @@ if not Exitted then
 		elseif CheckAuth() == "Lite" then
 			if isfolder("Normal Hub") then
 				if isfile("Normal Hub//key.txt") then
-					writefile("Normal Hub//key.txt", "NoKey")
+					writefile("Normal Hub//key.txt", "NoKeyTillNextLaunch")
 				else
-					writefile("Normal Hub//key.txt", "NoKey")
+					writefile("Normal Hub//key.txt", "NoKeyTillNextLaunch")
 				end
 			else
 				makefolder("Normal Hub")
-				writefile("Normal Hub//key.txt", "NoKey")
+				writefile("Normal Hub//key.txt", "NoKeyTillNextLaunch")
 			end
 		end
 
