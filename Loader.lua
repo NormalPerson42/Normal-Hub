@@ -1,3 +1,87 @@
+local notification = Instance.new("ScreenGui")
+local UIListLayout = Instance.new("UIListLayout")
+local placeholderframe_2 = Instance.new("Frame")
+local Icon = Instance.new("ImageLabel")
+local Title = Instance.new("TextLabel")
+local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+local Desc = Instance.new("TextLabel")
+local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
+local TimeLeft = Instance.new("Frame")
+
+notification.Name = "notification"
+notification.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+notification.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+notification.IgnoreGuiInset = true
+
+UIListLayout.Parent = notification
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 4)
+
+placeholderframe_2.Name = "Frame"
+placeholderframe_2.Parent = notification
+placeholderframe_2.BackgroundColor3 = Color3.fromRGB(71, 71, 71)
+placeholderframe_2.BackgroundTransparency = 0.2
+placeholderframe_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+placeholderframe_2.BorderSizePixel = 0
+placeholderframe_2.Position = UDim2.new(0.654205799, 0, 0.0433634967, 0)
+placeholderframe_2.Size = UDim2.new(0, 0, 0.0829562545, 0)
+
+Icon.Name = "Icon"
+Icon.Parent = placeholderframe_2
+Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Icon.BackgroundTransparency = 1.000
+Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Icon.BorderSizePixel = 0
+Icon.Size = UDim2.new(0.144557104, 0, 1, 0)
+Icon.Image = "http://www.roblox.com/asset/?id=1764960410"
+
+Title.Name = "Title"
+Title.Parent = placeholderframe_2
+Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1.000
+Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Title.BorderSizePixel = 0
+Title.Position = UDim2.new(0.177700356, 0, 0, 0)
+Title.Size = UDim2.new(0.775351703, 0, 0.5, 0)
+Title.Font = Enum.Font.SourceSans
+Title.Text = "..."
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextScaled = true
+Title.TextSize = 14.000
+Title.TextWrapped = true
+Title.TextXAlignment = Enum.TextXAlignment.Left
+
+UITextSizeConstraint.Parent = Title
+UITextSizeConstraint.MaxTextSize = 21
+
+Desc.Name = "Desc"
+Desc.Parent = placeholderframe_2
+Desc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Desc.BackgroundTransparency = 1.000
+Desc.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Desc.BorderSizePixel = 0
+Desc.Position = UDim2.new(0.177700356, 0, 0.5, 0)
+Desc.Size = UDim2.new(0.775351703, 0, 0.5, 0)
+Desc.Font = Enum.Font.SourceSans
+Desc.Text = "..."
+Desc.TextColor3 = Color3.fromRGB(145, 145, 145)
+Desc.TextScaled = true
+Desc.TextSize = 14.000
+Desc.TextWrapped = true
+Desc.TextXAlignment = Enum.TextXAlignment.Left
+
+UITextSizeConstraint_2.Parent = Desc
+UITextSizeConstraint_2.MaxTextSize = 21
+
+TimeLeft.Name = "TimeLeft"
+TimeLeft.Parent = placeholderframe_2
+TimeLeft.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TimeLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TimeLeft.BorderSizePixel = 0
+TimeLeft.Position = UDim2.new(0, 0, 1, 0)
+TimeLeft.Size = UDim2.new(1, 0, -0.0700000003, 0)
+
 local vers = "0.3.2"
 local RunningLatestVersion = false
 local RunningKeySystem = false
@@ -67,7 +151,7 @@ Status.TextWrapped = true
 
 StatusBar.Name = "StatusBar"
 StatusBar.Parent = hello
-StatusBar.BackgroundColor3 = Color3.fromRGB(208, 208, 208)
+StatusBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 StatusBar.BorderColor3 = Color3.fromRGB(0, 0, 255)
 StatusBar.BorderSizePixel = 0
 StatusBar.Position = UDim2.new(0.0237529688, 0, 0.680000007, 0)
@@ -100,7 +184,7 @@ exit.MouseButton1Click:Connect(function()
 	LoadingScreen:Destroy()
 end)
 
-wait(math.random(3, 6) / 10)
+wait(math.random(1, 2) / 15)
 
 if not Exitted then
 	Status.Text = "Checking Environment..."
@@ -142,7 +226,7 @@ if not Exitted then
 				end
 			end
 		end
-		
+
 		if readfile then
 			if typeof(readfile) == "function" then
 				if writefile then
@@ -172,7 +256,7 @@ if not Exitted then
 				end
 			end
 		end
-		
+
 		if writefile then
 			if typeof(writefile) == "function" then
 				writefile("TEST.txt", "test1")
@@ -311,7 +395,7 @@ if not Exitted then
 			Status.Text = "Your executor failed to pass the DelFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z."
 			error("Your executor failed to pass the DelFile() test. Which means it cannot run Normal Hub properly. Please get another executor like Solara, Xeno, Celery, Nezur, Wave, Synapse Z.")
 		end
-		
+
 		if isfolder("TEST_FOLDER") and delfolder then
 			delfolder("TEST_FOLDER")
 		end
@@ -323,14 +407,14 @@ if not Exitted then
 		if isfolder("TEST") and delfolder then
 			delfolder("TEST")
 		end
-		
+
 		if isfile("TEST.txt") then
 			delfile("TEST.txt")
 		end
 	end
 end
 
-wait(math.random(6, 9) / 10)
+wait(math.random(2, 4) / 15)
 
 if not Exitted then
 	CheckEveryEnv()
@@ -338,7 +422,7 @@ if not Exitted then
 	FillBar.Size = UDim2.new(0, 118, 0, 23)
 end
 
-wait(math.random(2, 4) / 10)
+wait(math.random(1, 2) / 15)
 
 local versioncheck, WhitelistTable = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/constants.lua"))()
 
@@ -347,7 +431,7 @@ if not Exitted then
 		RunningLatestVersion = true
 		Status.Text = "New update found! Running the latest version..."
 		FillBar.Size = UDim2.new(0, 160, 0, 23)
-		wait(math.random(3, 5) / 10)
+		wait(math.random(2, 3) / 15)
 		if not Exitted then
 			LoadingScreen:Destroy()
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
@@ -357,7 +441,7 @@ if not Exitted then
 	if not RunningLatestVersion and not Exitted then
 		Status.Text = "Checking Whitelist..."
 		FillBar.Size = UDim2.new(0, 204, 0, 23)
-		wait(math.random(4, 6) / 10)
+		wait(math.random(1, 2) / 15)
 		if not Exitted then
 			for i,v in pairs(WhitelistTable) do
 				for _,thing in pairs(v) do
@@ -372,16 +456,18 @@ if not Exitted then
 			FillBar.Size = UDim2.new(0, 298, 0, 23)
 		end
 
-		wait(math.random(8, 12) / 10)
+		wait(math.random(2, 3) / 15)
 
 		function CheckAuth()
 			if isfolder("Normal Hub") then
 				if isfile("Normal Hub//key.txt") then
 					local key = readfile("Normal Hub//key.txt")
 					if key == "trial" then
-						return true
+						return "Freemium"
+					elseif key == "NoKeyInputted" then
+						return "Lite"
 					else
-						return false
+						return "NoKey"
 					end
 				else
 					writefile("Normal Hub//key.txt", " ")
@@ -394,11 +480,11 @@ if not Exitted then
 			end
 		end
 
-		if not CheckAuth() and not Exitted then
+		if CheckAuth() == "NoKey" and not Exitted then
 			RunningKeySystem = true
 			Status.Text = "Key not found! Launching the key system..."
 			FillBar.Size = UDim2.new(0, 345, 0, 23)
-			wait(math.random(7, 10) / 10)
+			wait(math.random(1, 3) / 15)
 			if not Exitted then
 				LoadingScreen:Destroy()
 				local KeySystem = Instance.new("ScreenGui")
@@ -412,6 +498,7 @@ if not Exitted then
 				local discordserver = Instance.new("TextButton")
 				local UICorner_3 = Instance.new("UICorner")
 				local exit = Instance.new("TextButton")
+				local ContinueNoKey = Instance.new("TextButton")
 
 				KeySystem.Name = "KeySystem"
 				KeySystem.Parent = game:WaitForChild("CoreGui")
@@ -425,7 +512,7 @@ if not Exitted then
 				Frame.AnchorPoint = Vector2.new(0.5, 0.5)
 				Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
 				Frame.Size = UDim2.new(0, 287, 0, 128)
-				
+
 				local dragToggle = nil local dragStart = nil local startPos = nil local function updateInput(input)local delta = input.Position - dragStart local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)game:GetService('TweenService'):Create(Frame, TweenInfo.new(0.15), {Position = position}):Play()end Frame.InputBegan:Connect(function(input)if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then dragToggle = true dragStart = input.Position startPos = Frame.Position input.Changed:Connect(function()if input.UserInputState == Enum.UserInputState.End then dragToggle = false end end)end end)game:GetService('UserInputService').InputChanged:Connect(function(input)if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then if dragToggle then updateInput(input)end end end)
 
 				titlewow.Name = "title wow"
@@ -459,13 +546,28 @@ if not Exitted then
 				keyinput.TextSize = 14.000
 				keyinput.TextWrapped = true
 
+				ContinueNoKey.Name = "ContinueNoKey"
+				ContinueNoKey.Parent = Frame
+				ContinueNoKey.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				ContinueNoKey.BackgroundTransparency = 1.000
+				ContinueNoKey.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				ContinueNoKey.BorderSizePixel = 0
+				ContinueNoKey.Position = UDim2.new(0.243902445, 0, 0.8515625, 0)
+				ContinueNoKey.Size = UDim2.new(0, 147, 0, 19)
+				ContinueNoKey.Font = Enum.Font.SourceSans
+				ContinueNoKey.Text = "Continue with no key."
+				ContinueNoKey.TextColor3 = Color3.fromRGB(131, 131, 131)
+				ContinueNoKey.TextScaled = true
+				ContinueNoKey.TextSize = 14.000
+				ContinueNoKey.TextWrapped = true
+
 				checkkey.Name = "checkkey"
 				checkkey.Parent = Frame
 				checkkey.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 				checkkey.BorderColor3 = Color3.fromRGB(0, 0, 0)
 				checkkey.BorderSizePixel = 0
 				checkkey.Position = UDim2.new(0.0452961661, 0, 0.640625, 0)
-				checkkey.Size = UDim2.new(0, 75, 0, 40)
+				checkkey.Size = UDim2.new(0, 75, 0, 27)
 				checkkey.Font = Enum.Font.SourceSans
 				checkkey.Text = "Check Key"
 				checkkey.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -475,29 +577,13 @@ if not Exitted then
 
 				UICorner.Parent = checkkey
 
-				getkey.Name = "getkey"
-				getkey.Parent = Frame
-				getkey.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-				getkey.BorderColor3 = Color3.fromRGB(0, 0, 0)
-				getkey.BorderSizePixel = 0
-				getkey.Position = UDim2.new(0.696864128, 0, 0.640625, 0)
-				getkey.Size = UDim2.new(0, 75, 0, 40)
-				getkey.Font = Enum.Font.SourceSans
-				getkey.Text = "Get Key"
-				getkey.TextColor3 = Color3.fromRGB(0, 0, 0)
-				getkey.TextScaled = true
-				getkey.TextSize = 14.000
-				getkey.TextWrapped = true
-
-				UICorner_2.Parent = getkey
-
 				discordserver.Name = "discordserver"
 				discordserver.Parent = Frame
 				discordserver.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
 				discordserver.BorderColor3 = Color3.fromRGB(0, 0, 0)
 				discordserver.BorderSizePixel = 0
 				discordserver.Position = UDim2.new(0.369337976, 0, 0.640625, 0)
-				discordserver.Size = UDim2.new(0, 75, 0, 40)
+				discordserver.Size = UDim2.new(0, 75, 0, 27)
 				discordserver.Font = Enum.Font.SourceSans
 				discordserver.Text = "Discord"
 				discordserver.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -505,7 +591,23 @@ if not Exitted then
 				discordserver.TextSize = 14.000
 				discordserver.TextWrapped = true
 
-				UICorner_3.Parent = discordserver
+				UICorner_2.Parent = discordserver
+
+				getkey.Name = "getkey"
+				getkey.Parent = Frame
+				getkey.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+				getkey.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				getkey.BorderSizePixel = 0
+				getkey.Position = UDim2.new(0.696864128, 0, 0.640625, 0)
+				getkey.Size = UDim2.new(0, 75, 0, 27)
+				getkey.Font = Enum.Font.SourceSans
+				getkey.Text = "Get Key"
+				getkey.TextColor3 = Color3.fromRGB(0, 0, 0)
+				getkey.TextScaled = true
+				getkey.TextSize = 14.000
+				getkey.TextWrapped = true
+
+				UICorner_3.Parent = getkey
 
 				exit.Name = "exit"
 				exit.Parent = Frame
@@ -522,23 +624,47 @@ if not Exitted then
 				exit.TextSize = 14.000
 				exit.TextWrapped = true
 
-				function notify(msg, t)
-					loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/LinoriaLib/main/Library.lua"))():Notify(msg, t or 5)
+				function notify(title, desc, duration)
+					local sound = Instance.new("Sound", game.ReplicatedStorage)
+					sound.SoundId = "rbxassetid://4590657391"
+					sound.Volume = 2
+					sound:Play()
 
-					task.spawn(function()
-						local sound = Instance.new("Sound", game.ReplicatedStorage)
-						sound.SoundId = "rbxassetid://4590657391"
-						sound.Volume = 2
-						sound:Play()
+					local notificationframe = placeholderframe_2:Clone()
+					notificationframe.Parent = placeholderframe_2.Parent
+					notificationframe.Title.Text = title
+					notificationframe.Desc.Text = desc
 
-						sound.Ended:Wait()
-						sound:Destroy()
-					end)
+					notificationframe:TweenSize(
+						UDim2.new(0.265, 0, 0.083, 0),
+						Enum.EasingDirection.In,
+						Enum.EasingStyle.Linear,
+						0.25,
+						false
+					)
+					wait(0.25)
+					sound:Destroy()
+					notificationframe.TimeLeft:TweenSize(
+						UDim2.new(0, 0, -0.0700000003, 0),
+						Enum.EasingDirection.In,
+						Enum.EasingStyle.Linear,
+						duration,
+						false
+					)
+					wait(duration)
+					notificationframe:TweenSize(
+						UDim2.new(0, 0, 0.083, 0),
+						Enum.EasingDirection.In,
+						Enum.EasingStyle.Linear,
+						0.25,
+						false
+					)
+					wait(0.25)
+					notificationframe:Destroy()
 				end
 
 				checkkey.MouseButton1Click:Connect(function()
 					if keyinput.Text == "trial" then
-						notify("Correct Key! Launching Normal Hub - Loader.", 3)
 						if not isfolder("Normal Hub") then
 							makefolder("Normal Hub")
 							writefile("Normal Hub//key.txt", keyinput.Text)
@@ -553,34 +679,74 @@ if not Exitted then
 								KeySystem:Destroy()
 							end
 						end
-						wait(math.random(7, 13) / 10)
+						spawn(function()
+							notify("Correct Key!", "Launching Normal Hub - Loader.", 3)
+						end)
+						wait(math.random(4, 7) / 15)
 						loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
 					else
-						notify("Incorrect Key!", 3)
+						spawn(function()
+							notify("Incorrect Key!", "Please Check or Enter your key.", 3)
+						end)
 					end
 				end)
 
 				getkey.MouseButton1Click:Connect(function()
-					notify("Currently there is not an official key system. The key is 'trial'.", 3)
+					setclipboard("trial")
+					spawn(function()
+						notify("At the moment don't have an official key system.", "The Key has been copied to your clipboard.", 3)--notify("Set to clipboard!", "The key link has been copied to your clipboard.", 3)
+					end)
 				end)
 
 				discordserver.MouseButton1Click:Connect(function()
-					notify("Coming Soon!", 3)
+					setclipboard("https://discord.gg/qhZXXB8jRb")
+					spawn(function()
+						notify("Set to clipboard!", "The Discord link has been copied to your clipboard.", 3)
+					end)
 				end)
 
 				exit.MouseButton1Click:Connect(function()
 					KeySystem:Destroy()
 				end)
+				
+				ContinueNoKey.MouseButton1Click:Connect(function()
+					spawn(function()
+						notify("[WARNING] You will have less features than usual,", "If you want more features then you have to get the key.", 3)
+					end)
+					if isfolder("Normal Hub") then
+						if isfile("Normal Hub//key.txt") then
+							writefile("Normal Hub//key.txt", "NoKeyInputted")
+						else
+							writefile("Normal Hub//key.txt", "NoKeyInputted")
+						end
+					else
+						makefolder("Normal Hub")
+						writefile("Normal Hub//key.txt", "NoKeyInputted")
+					end
+					wait(math.random(4, 7) / 15)
+					loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Loader.lua"))()
+				end)
+			end
+		elseif CheckAuth() == "Lite" then
+			if isfolder("Normal Hub") then
+				if isfile("Normal Hub//key.txt") then
+					writefile("Normal Hub//key.txt", "NoKey")
+				else
+					writefile("Normal Hub//key.txt", "NoKey")
+				end
+			else
+				makefolder("Normal Hub")
+				writefile("Normal Hub//key.txt", "NoKey")
 			end
 		end
 
 		if not RunningKeySystem and not Exitted then
-			wait(math.random(8, 12) / 10)
+			wait(math.random(1, 3) / 15)
 			if not Exitted then
 				Status.Text = "Finished!"
 				FillBar.Size = UDim2.new(0, 401, 0, 23)
 			end
-			wait(math.random(9, 13) / 10)
+			wait(math.random(9, 11) / 10)
 			if not Exitted then
 				LoadingScreen:Destroy()
 			end
