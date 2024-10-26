@@ -5,7 +5,7 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 				_G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(_&SiUZ*;6fKkyzw#-z?4Cg3]&e8"] = nil
 				getgenv()[";Y8[TAwG;/&n#Xu.*U/A#cxPi1ZzDuzxKb-M,0=W([-EgTku/cQYpSm_4RzCVxCijU_6D%CrP@juq!Xew9d=u.,;Dh+SU@.g[:Z#"] = nil
 				delfile("G2gybc*([;!!09AQZBVTpRc64gW)57S0{xr7i5cA?cCdvQy,RKW)zJWRZAqRkPguxH44V(],HyhkV[BfUB](=3V;ZaXk_/S5r!W8.txt")
-				
+
 				-- Set up some stuff --
 				function Setup(CollisionClone)
 					CollisionClone.CanCollide = false
@@ -21,8 +21,9 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 				local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
 				local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
 				local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
-				
+
 				local Values = {
+					WalkSpeed = 16,
 					WalkSpeedBypass = false,
 				}
 
@@ -38,7 +39,7 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 					Main = Window:AddTab('Main'),
 					['UI Settings'] = Window:AddTab('UI Settings'),
 				}
-				
+
 				local GroupBoxes = {
 					Main = {
 						GroupBox1 = Tabs.Main:AddLeftGroupbox('Local-Player'),
@@ -51,9 +52,13 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 					Min = 0,
 					Max = 22,
 					Rounding = 0,
-					Compact = true
+					Compact = true,
+					
+					Callback = function(Value)
+						Values.WalkSpeed = Value
+					end
 				})
-				
+
 				GroupBoxes.Main.GroupBox1:AddToggle('BypassWalkSpeedAntiCheat', {
 					Text = 'Bypass Walk Speed Anti-Cheat',
 					Default = false,
@@ -83,9 +88,9 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 						end)
 					end
 				})
-				
+
 				game:GetService("RunService").RenderStepped:Connect(function()
-					game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Toggles.WalkSpeed.Value
+					game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Values.WalkSpeed
 				end)
 			else
 				error("Failed to load the script! Please retry again.")
