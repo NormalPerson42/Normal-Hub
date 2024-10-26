@@ -64,7 +64,7 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 						Values.WalkSpeedBypass = Value
 						task.spawn(function()
 							while Values.WalkSpeedBypass and CollisionClone do
-								Options.BypassWalkSpeedAntiCheat:SetMax(75)
+								shared.Options.BypassWalkSpeedAntiCheat:SetMax(75)
 								if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored then
 									CollisionClone.Massless = true
 									repeat task.wait() until not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored
@@ -76,7 +76,7 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 							end
 
 							Values.WalkSpeedBypass = false
-							Options.BypassWalkSpeedAntiCheat:SetMax(22)
+							shared.Options.BypassWalkSpeedAntiCheat:SetMax(22)
 							if CollisionClone then
 								CollisionClone.Massless = true
 							end
@@ -85,7 +85,7 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 				})
 
 				game:GetService("RunService").RenderStepped:Connect(function()
-					game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Options.BypassWalkSpeedAntiCheat.Value
+					game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = shared.Options.BypassWalkSpeedAntiCheat.Value
 				end)
 			else
 				error("Failed to load the script! Please retry again.")
