@@ -23,7 +23,6 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 				local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
 				local Values = {
-					WalkSpeed = 16,
 					WalkSpeedBypass = false,
 				}
 
@@ -52,11 +51,7 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 					Min = 0,
 					Max = 22,
 					Rounding = 0,
-					Compact = true,
-					
-					Callback = function(Value)
-						Values.WalkSpeed = Value
-					end
+					Compact = true
 				})
 
 				GroupBoxes.Main.GroupBox1:AddToggle('BypassWalkSpeedAntiCheat', {
@@ -69,7 +64,7 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 						Values.WalkSpeedBypass = Value
 						task.spawn(function()
 							while Values.WalkSpeedBypass and CollisionClone do
-								Toggles.BypassWalkSpeedAntiCheat:SetMax(75)
+								Options.BypassWalkSpeedAntiCheat:SetMax(75)
 								if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored then
 									CollisionClone.Massless = true
 									repeat task.wait() until not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored
@@ -81,7 +76,7 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 							end
 
 							Values.WalkSpeedBypass = false
-							Toggles.BypassWalkSpeedAntiCheat:SetMax(22)
+							Options.BypassWalkSpeedAntiCheat:SetMax(22)
 							if CollisionClone then
 								CollisionClone.Massless = true
 							end
@@ -90,7 +85,7 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 				})
 
 				game:GetService("RunService").RenderStepped:Connect(function()
-					game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Values.WalkSpeed
+					game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Options.BypassWalkSpeedAntiCheat.Value
 				end)
 			else
 				error("Failed to load the script! Please retry again.")
