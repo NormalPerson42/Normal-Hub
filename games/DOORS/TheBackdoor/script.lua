@@ -5,12 +5,26 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 				_G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(_&SiUZ*;6fKkyzw#-z?4Cg3]&e8"] = nil
 				getgenv()[";Y8[TAwG;/&n#Xu.*U/A#cxPi1ZzDuzxKb-M,0=W([-EgTku/cQYpSm_4RzCVxCijU_6D%CrP@juq!Xew9d=u.,;Dh+SU@.g[:Z#"] = nil
 				delfile("G2gybc*([;!!09AQZBVTpRc64gW)57S0{xr7i5cA?cCdvQy,RKW)zJWRZAqRkPguxH44V(],HyhkV[BfUB](=3V;ZaXk_/S5r!W8.txt")
-
+				
+				-- Set up some stuff --
+				function Setup(CollisionClone)
+					CollisionClone.CanCollide = false
+					CollisionClone.Massless = true
+					CollisionClone.CanQuery = false
+					CollisionClone.Name = "CollisionClone"
+					if CollisionClone:FindFirstChild("CollisionCrouch") then
+						CollisionClone.CollisionCrouch:Destroy()
+					end
+					CollisionClone.Parent = game.Players.LocalPlayer.Character
+				end
 				local repo = "https://raw.githubusercontent.com/deividcomsono/LinoriaLib/refs/heads/main/"
-
 				local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
 				local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
 				local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
+				
+				local Values = {
+					WalkSpeedBypass = false,
+				}
 
 				local Window = Library:CreateWindow({
 					Title = 'Normal Hub | Doors - The Backdoor',
@@ -37,12 +51,42 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 					Min = 0,
 					Max = 22,
 					Rounding = 0,
-					Compact = true,
+					Compact = true
+				})
+				
+				GroupBoxes.Main.GroupBox1:AddToggle('BypassWalkSpeedAntiCheat', {
+					Text = 'Bypass Walk Speed Anti-Cheat',
+					Default = false,
+					Tooltip = 'Bypasses the Walk Speed Anti-Cheat',
 
 					Callback = function(Value)
-						print('[Normal Hub] MySlider was changed! New value:', Value)
+						local CollisionClone = Setup(game.Players.LocalPlayer.Character:FindFirstChild("Collision"):Clone())
+						Values.WalkSpeedBypass = Value
+						task.spawn(function()
+							while Values.WalkSpeedBypass and CollisionClone do
+								Toggles.BypassWalkSpeedAntiCheat:SetMax(75)
+								if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored then
+									CollisionClone.Massless = true
+									repeat task.wait() until not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored
+									task.wait(0.15)
+								else
+									CollisionClone.Massless = not CollisionClone.Massless
+								end
+								task.wait(0.22)
+							end
+
+							Values.WalkSpeedBypass = false
+							Toggles.BypassWalkSpeedAntiCheat:SetMax(22)
+							if CollisionClone then
+								CollisionClone.Massless = true
+							end
+						end)
 					end
 				})
+				
+				game:GetService("RunService").RenderStepped:Connect(function()
+					game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Toggles.WalkSpeed.Value
+				end)
 			else
 				error("Failed to load the script! Please retry again.")
 			end
