@@ -1,3 +1,7 @@
+if game.CoreGui:FindFirstChild("LoadingScreen") then
+	error("The loader is already running!")
+end
+
 local notification = Instance.new("ScreenGui")
 local UIListLayout = Instance.new("UIListLayout")
 local placeholderframe_2 = Instance.new("Frame")
@@ -105,7 +109,7 @@ local FillBar = Instance.new("Frame")
 local exit = Instance.new("TextButton")
 
 LoadingScreen.Name = "LoadingScreen"
-LoadingScreen.Parent = game:WaitForChild("CoreGui")
+LoadingScreen.Parent = game.CoreGui
 LoadingScreen.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 LoadingScreen.ResetOnSpawn = false
 
