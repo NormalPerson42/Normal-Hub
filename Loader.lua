@@ -88,7 +88,7 @@ TimeLeft.Size = UDim2.new(1, 0, -0.0700000003, 0)
 
 function CheckGame()
 	if game.PlaceId == 6839171747 then -- doors game
-		if game.ReplicatedStorage.GameData.SecretFloor == true then
+		if game.ReplicatedStorage.GameData.SecretFloor.Value == true then
 			return "Doors_TheBackdoor"
 		end
 	end
