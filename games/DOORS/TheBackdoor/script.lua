@@ -6,7 +6,6 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 				getgenv()[";Y8[TAwG;/&n#Xu.*U/A#cxPi1ZzDuzxKb-M,0=W([-EgTku/cQYpSm_4RzCVxCijU_6D%CrP@juq!Xew9d=u.,;Dh+SU@.g[:Z#"] = nil
 				delfile("G2gybc*([;!!09AQZBVTpRc64gW)57S0{xr7i5cA?cCdvQy,RKW)zJWRZAqRkPguxH44V(],HyhkV[BfUB](=3V;ZaXk_/S5r!W8.txt")
 
-				-- Set up some stuff --
 				function Setup(CollisionClone)
 					CollisionClone.CanCollide = false
 					CollisionClone.Massless = true
@@ -64,7 +63,7 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 						Values.WalkSpeedBypass = Value
 						task.spawn(function()
 							while Values.WalkSpeedBypass and CollisionClone do
-								shared.Options.BypassWalkSpeedAntiCheat:SetMax(75)
+								shared.Options.WalkSpeed:SetMax(75)
 								if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored then
 									CollisionClone.Massless = true
 									repeat task.wait() until not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored
@@ -76,7 +75,7 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 							end
 
 							Values.WalkSpeedBypass = false
-							shared.Options.BypassWalkSpeedAntiCheat:SetMax(22)
+							shared.Options.WalkSpeed:SetMax(22)
 							if CollisionClone then
 								CollisionClone.Massless = true
 							end
@@ -85,7 +84,8 @@ if _G["k1m/uN?h*5Mn{j{bHQ]{8*HFP6_qarFyxxZ!vtT9Kvc_afV;1jYrW}SFAx2G1;%X;1FiA@z?(
 				})
 
 				game:GetService("RunService").RenderStepped:Connect(function()
-					game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = shared.Options.BypassWalkSpeedAntiCheat.Value
+					
+					game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = shared.Options.WalkSpeed.Value
 				end)
 			else
 				error("Failed to load the script! Please retry again.")
