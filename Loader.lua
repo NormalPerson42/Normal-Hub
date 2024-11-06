@@ -43,6 +43,10 @@ if CheckGame() == nil then
 	print("Game not supported. Launching the universal script...")
 elseif CheckGame() == "Doors_TheBackdoor" then 	
 	print("Found game 'Doors - The Backdoor'. Launching the script...")
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/games/Realistic%20Street%20Soccer/4v4/script.lua"))()
+	getgenv()["Loader Started"] = false
 elseif CheckGame() == "RealisticStreetSoccer_4v4_nonpro" then 
 	print("Found game 'Realistic Street Soccer - 4v4'. Launching the script...")
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/games/Realistic%20Street%20Soccer/4v4/script.lua"))()
+	getgenv()["Loader Started"] = false
 end
