@@ -32,6 +32,8 @@ function CheckGame()
 		if game.ReplicatedStorage.GameData.SecretFloor.Value == true then
 			return "Doors_TheBackdoor"
 		end
+	elseif game.PlaceId == 14315258385 then
+		return "RealisticStreetSoccer_4v4_nonpro"
 	else
 		return nil
 	end
@@ -39,6 +41,8 @@ end
 
 if CheckGame() == nil then
 	print("Game not supported. Launching the universal script...")
-elseif CheckGame() == "Doors_TheBackdoor" then
-	print("Found game 'Doors | The Backdoor'. Launching the script...")
+elseif CheckGame() == "Doors_TheBackdoor" then 	
+	print("Found game 'Doors - The Backdoor'. Launching the script...")
+elseif CheckGame() == "RealisticStreetSoccer_4v4_nonpro" then 
+	print("Found game 'Realistic Street Soccer - 4v4'. Launching the script...")
 end
