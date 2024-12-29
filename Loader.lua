@@ -204,7 +204,7 @@ Desc_2.TextWrapped = true
 Desc_2.TextXAlignment = Enum.TextXAlignment.Left
 
 local version2, blacklist, supportedgames = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/constants.lua"))()
-local version1 = "0.2"
+local version1 = "0.1"
 for i,v in pairs(blacklist) do
 	if v[1] == game.Players.LocalPlayer.Name then
 		if game.Players:GetUserIdFromNameAsync(v[1]) ~= v[2] then
