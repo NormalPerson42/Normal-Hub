@@ -1,8 +1,3 @@
--- Gui to Lua
--- Version: 3.2
-
--- Instances:
-
 local Loaderlua = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local Shadow = Instance.new("Frame")
@@ -24,8 +19,6 @@ local CurrentStatus = Instance.new("Frame")
 local UICorner_6 = Instance.new("UICorner")
 local Title_2 = Instance.new("TextLabel")
 local Desc_2 = Instance.new("TextLabel")
-
---Properties:
 
 Loaderlua.Name = "Loader.lua"
 Loaderlua.Parent = game:GetService("CoreGui")
@@ -210,7 +203,6 @@ Desc_2.TextSize = 14.000
 Desc_2.TextWrapped = true
 Desc_2.TextXAlignment = Enum.TextXAlignment.Left
 
--- Scripts:
 local version2, blacklist, supportedgames = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/constants.lua"))()
 local version1 = "0.1"
 for i,v in pairs(blacklist) do
