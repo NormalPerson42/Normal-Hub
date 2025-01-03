@@ -1,3 +1,8 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
 local Loaderlua = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local Shadow = Instance.new("Frame")
@@ -19,6 +24,8 @@ local CurrentStatus = Instance.new("Frame")
 local UICorner_6 = Instance.new("UICorner")
 local Title_2 = Instance.new("TextLabel")
 local Desc_2 = Instance.new("TextLabel")
+
+--Properties:
 
 Loaderlua.Name = "Loader.lua"
 Loaderlua.Parent = game:GetService("CoreGui")
@@ -203,8 +210,9 @@ Desc_2.TextSize = 14.000
 Desc_2.TextWrapped = true
 Desc_2.TextXAlignment = Enum.TextXAlignment.Left
 
+-- Scripts:
 local version2, blacklist, supportedgames = loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/constants.lua"))()
-local version1 = "0.2"
+local version1 = "0.1"
 for i,v in pairs(blacklist) do
 	if v[1] == game.Players.LocalPlayer.Name then
 		if game.Players:GetUserIdFromNameAsync(v[1]) ~= v[2] then
@@ -268,3 +276,4 @@ Desc_2.Text = "Enjoy using our newest version of Normal Hub!"
 Status4.BackgroundColor3 = Color3.fromRGB(0, 0, 238)
 task.wait(1.5)
 Loaderlua:Destroy()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NormalPerson42/Normal-Hub/refs/heads/main/Main.lua"))()
